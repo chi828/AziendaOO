@@ -1,0 +1,224 @@
+Albania
+Andorra
+Austria
+Belgio
+Bulgaria
+Danimarca
+Finlandia
+Francia
+Germania
+Regno Unito
+Grecia
+Irlanda
+Islanda
+Liechtenstein
+Lussemburgo
+Malta
+Monaco
+Norvegia
+Paesi Bassi
+Polonia
+Portogallo
+Romania
+San Marino
+Spagna
+Svezia
+Svizzera
+Ucraina
+Ungheria
+Federazione russa
+Stato della Città del Vaticano
+Estonia
+Lettonia
+Lituania
+Croazia
+Slovenia
+Bosnia-Erzegovina
+Macedonia del Nord
+Moldova
+Slovacchia
+Bielorussia
+Repubblica ceca
+Montenegro
+Serbia
+Kosovo
+Afghanistan
+Arabia Saudita
+Bahrein
+Bangladesh
+Bhutan
+Myanmar/Birmania
+Brunei Darussalam
+Cambogia
+Sri Lanka
+Cina
+Cipro
+Corea del Nord
+Corea del Sud
+Emirati Arabi Uniti
+Filippine
+Palestina
+Giappone
+Giordania
+India
+Indonesia
+Iran
+Iraq
+Israele
+Kuwait
+Laos
+Libano
+Timor Leste
+Maldive
+Malaysia
+Mongolia
+Nepal
+Oman
+Pakistan
+Qatar
+Singapore
+Siria
+Thailandia
+Turchia
+Vietnam
+Yemen
+Kazakhstan
+Uzbekistan
+Armenia
+Azerbaigian
+Georgia
+Kirghizistan
+Tagikistan
+Taiwan
+Turkmenistan
+Algeria
+Angola
+Costa d'Avorio
+Benin
+Botswana
+Burkina Faso
+Burundi
+Camerun
+Capo Verde
+Repubblica Centrafricana
+Ciad
+Comore
+Congo
+Egitto
+Etiopia
+Gabon
+Gambia
+Ghana
+Gibuti
+Guinea
+Guinea-Bissau
+Guinea equatoriale
+Kenya
+Lesotho
+Liberia
+Libia
+Madagascar
+Malawi
+Mali
+Marocco
+Mauritania
+Maurizio
+Mozambico
+Namibia
+Niger
+Nigeria
+Ruanda
+Sao Tomé e Principe
+Seychelles
+Senegal
+Sierra Leone
+Somalia
+Sudafrica
+Sudan
+Eswatini
+Tanzania
+Togo
+Tunisia
+Uganda
+Repubblica Democratica del Congo
+Zambia
+Zimbabwe
+Eritrea
+Sud Sudan
+Antigua e Barbuda
+Bahamas
+Barbados
+Belize
+Canada
+Costa Rica
+Cuba
+Dominica
+Repubblica Dominicana
+El Salvador
+Giamaica
+Grenada
+Guatemala
+Haiti
+Honduras
+Messico
+Nicaragua
+Panama
+Santa Lucia
+Saint Vincent e Grenadine
+Saint Kitts e Nevis
+Stati Uniti d'America
+Argentina
+Bolivia
+Brasile
+Cile
+Colombia
+Ecuador
+Guyana
+Paraguay
+Perù
+Suriname
+Trinidad e Tobago
+Uruguay
+Venezuela
+Australia
+Figi
+Kiribati
+Isole Marshall
+Stati Federati di Micronesia
+Nauru
+Nuova Zelanda
+Palau
+Papua Nuova Guinea
+Isole Salomone
+Samoa
+Tonga
+Tuvalu
+Vanuatu
+Nuova Caledonia
+Saint-Martin (FR)
+Sahara occidentale
+Saint-Barthélemy
+Bermuda
+Isole Cook (NZ)
+Gibilterra
+Isole Cayman
+Anguilla
+Polinesia francese
+Isole Fær Øer
+Jersey
+Aruba
+Sint Maarten (NL)
+Groenlandia
+Sark
+Guernsey
+Isole Falkland (Malvine)
+Isola di Man
+Montserrat
+Curaçao
+Isole Pitcairn
+Saint Pierre e Miquelon
+Sant'Elena
+Terre australi e antartiche francesi
+Isole Turks e Caicos
+Isole Vergini britanniche
+Wallis e Futuna
