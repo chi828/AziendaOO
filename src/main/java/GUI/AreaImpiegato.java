@@ -4,6 +4,8 @@ import Controller.Controller;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,6 +31,8 @@ public class AreaImpiegato extends JFrame {
         ///////////////////////////////////////IMPOSTAZIONI FINESTRA//////////////////////////////////////////////////////////////////////////
 
         super("Area impieagato");
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setSize(1300,800);
 
@@ -310,7 +314,6 @@ public class AreaImpiegato extends JFrame {
         panelSud.setBorder(bordoFinaleSud);
 
         //Dichiarazione dei bottoni di opzioni
-        JButton getInfoButton = new JButton("Informazioni impiegato");
         JButton setLabButton = new JButton("Assegna/Cambia laboratorio");
         JButton gestioneLavoriButton = new JButton("Gestione lavori");
         JButton eliminaImpiegatoButton = new JButton("Elimina impiegato");
@@ -320,7 +323,6 @@ public class AreaImpiegato extends JFrame {
         //Pannello riga bottoni di opzioni
         JPanel rigaOpzioniUnoBottoni = new JPanel(new FlowLayout());
 
-        rigaOpzioniUnoBottoni.add(getInfoButton);
         rigaOpzioniUnoBottoni.add(setLabButton);
         rigaOpzioniUnoBottoni.add(gestioneLavoriButton);
         rigaOpzioniUnoBottoni.add(eliminaImpiegatoButton);
@@ -407,7 +409,6 @@ public class AreaImpiegato extends JFrame {
         Border bordoFinaleConcludi = BorderFactory.createCompoundBorder(bordoEsternoConcludi, bordoInteroConcludi);
 
         //Dimensione bottoni
-        getInfoButton.setPreferredSize(new Dimension(200,50));
         setLabButton.setPreferredSize(new Dimension(200,50));
         gestioneLavoriButton.setPreferredSize(new Dimension(200,50));
         eliminaImpiegatoButton.setPreferredSize(new Dimension(200,50));
@@ -913,14 +914,16 @@ public class AreaImpiegato extends JFrame {
             }
         });
 
-        //Gestione bottone visualizza carriera
-        getInfoButton.addActionListener(new ActionListener() {
+
+
+        //Gestione evento riga tabella impiegati (Visualizzazione info impiegato)
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void valueChanged(ListSelectionEvent e) {
 
                 int rigaSelezionata = table.getSelectedRow();
 
-                if(rigaSelezionata >= 0){
+                if(rigaSelezionata >= 0) {
 
                     svuotaModelTable(modelTableCarriera);
                     svuotaModelTable(modelTableLabResponsabile);
@@ -930,11 +933,10 @@ public class AreaImpiegato extends JFrame {
                     svuotaModelTable(modelloProgettiInCorsoContribuito);
                     svuotaModelTable(modelloProgConclusiContr);
 
-                    controller.setModelliInfoImpiegato(modelTableCarriera,modelTableLabResponsabile,modelTableProgReferente,
-                            modelTableProgResponsabile,modelloProgettiInCorso,modelloProgettiInCorsoContribuito,
-                            modelloProgConclusiContr,(String) modelTable.getValueAt(rigaSelezionata,4));
-
-                }else JOptionPane.showMessageDialog(null, "seleziona un impiegato");
+                    controller.setModelliInfoImpiegato(modelTableCarriera, modelTableLabResponsabile, modelTableProgReferente,
+                            modelTableProgResponsabile, modelloProgettiInCorso, modelloProgettiInCorsoContribuito,
+                            modelloProgConclusiContr, (String) modelTable.getValueAt(rigaSelezionata, 4));
+                }
             }
         });
 
@@ -962,7 +964,20 @@ public class AreaImpiegato extends JFrame {
 
                     String cfSelezionato = (String) modelTable.getValueAt(rigaSelezionata,4);
 
-                    controller.updateAfferenzaImp(cfSelezionato, setNomeLabField.getText(), setTopicLabField.getText());
+                    if(controller.updateAfferenzaImp(cfSelezionato, setNomeLabField.getText(), setTopicLabField.getText())){
+
+                        svuotaModelTable(modelTable);
+                        svuotaModelTable(modelTableCarriera);
+                        svuotaModelTable(modelTableLabResponsabile);
+                        svuotaModelTable(modelTableProgReferente);
+                        svuotaModelTable(modelTableProgResponsabile);
+                        svuotaModelTable(modelloProgettiInCorso);
+                        svuotaModelTable(modelloProgettiInCorsoContribuito);
+                        svuotaModelTable(modelloProgConclusiContr);
+
+                        setNomeLabField.setText("");
+                        setTopicLabField.setText("");
+                    }
 
                 }else JOptionPane.showMessageDialog(null,"Seleziona l'impiegato a cui assegnare il laboratorio");
             }
@@ -988,9 +1003,7 @@ public class AreaImpiegato extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 rigaOpzioniUnoBottoni.setVisible(false);
-
                 menuGestioneLavori.setVisible(true);
-
                 panelSud.setBorder(bordoFinaleMenuLav);
             }
         });
@@ -1001,9 +1014,7 @@ public class AreaImpiegato extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 menuGestioneLavori.setVisible(false);
-
                 rigaOpzioniUnoBottoni.setVisible(true);
-
                 panelSud.setBorder(bordoFinaleSud);
             }
         });
@@ -1059,7 +1070,24 @@ public class AreaImpiegato extends JFrame {
 
                         String cf = (String) modelTable.getValueAt(rigaSelezionata,4);
 
-                        controller.insertLavorare(cf,setCupField.getText(),Integer.parseInt(setOreField.getText()));
+                       if (controller.insertLavorare(cf,setCupField.getText(),Integer.parseInt(setOreField.getText()))){
+
+                           //Aggiornamento tabelle
+                           svuotaModelTable(modelTableCarriera);
+                           svuotaModelTable(modelTableLabResponsabile);
+                           svuotaModelTable(modelTableProgReferente);
+                           svuotaModelTable(modelTableProgResponsabile);
+                           svuotaModelTable(modelloProgettiInCorso);
+                           svuotaModelTable(modelloProgettiInCorsoContribuito);
+                           svuotaModelTable(modelloProgConclusiContr);
+
+                           controller.setModelliInfoImpiegato(modelTableCarriera, modelTableLabResponsabile, modelTableProgReferente,
+                                   modelTableProgResponsabile, modelloProgettiInCorso, modelloProgettiInCorsoContribuito,
+                                   modelloProgConclusiContr, (String) modelTable.getValueAt(rigaSelezionata, 4));
+
+                           setCupField.setText("");
+                           setOreField.setText("");
+                       }
 
                     } else JOptionPane.showMessageDialog(null, "campo ore non valido, assegnare un intero positivo");
                 }else JOptionPane.showMessageDialog(null, "Selezionare l'impiegato a cui assegnare il lavoro");
@@ -1071,48 +1099,10 @@ public class AreaImpiegato extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int rigaSelezionata = table.getSelectedRow();
+                menuGestioneLavori.setVisible(false);
+                moduloSetOre.setVisible(true);
+                panelSud.setBorder(bordoFinaleCambioOre);
 
-                if(rigaSelezionata >= 0){
-
-                    menuGestioneLavori.setVisible(false);
-
-                    moduloSetOre.setVisible(true);
-
-                    panelSud.setBorder(bordoFinaleCambioOre);
-
-                    table.setEnabled(false);
-                    ricercaPer.setEnabled(false);
-                    ricercaSpecifica.setEnabled(false);
-                    panelloIntervalliData.setVisible(false);
-                    panelloFiltroLab.setVisible(false);
-
-                    String cfSelezioanto = (String) modelTable.getValueAt(rigaSelezionata,4);
-
-                    svuotaModelTable(modelTableLabResponsabile);
-                    svuotaModelTable(modelTableProgReferente);
-                    svuotaModelTable(modelTableProgResponsabile);
-                    svuotaModelTable(modelloProgettiInCorso);
-                    svuotaModelTable(modelloProgettiInCorsoContribuito);
-                    svuotaModelTable(modelloProgConclusiContr);
-                    svuotaModelTable(modelTableCarriera);
-
-                    controller.setModelliInfoImpiegato(modelTableCarriera,modelTableLabResponsabile,modelTableProgReferente,
-                            modelTableProgResponsabile,modelloProgettiInCorso,modelloProgettiInCorsoContribuito,
-                            modelloProgConclusiContr,(String) modelTable.getValueAt(rigaSelezionata,4));
-
-                    svuotaModelTable(modelTable);
-                    svuotaModelTable(modelTableLabResponsabile);
-                    svuotaModelTable(modelTableProgReferente);
-                    svuotaModelTable(modelTableProgResponsabile);
-                    svuotaModelTable(modelloProgettiInCorsoContribuito);
-                    svuotaModelTable(modelloProgConclusiContr);
-                    svuotaModelTable(modelTableCarriera);
-
-                    controller.setImpiegatiPerCF(modelTable, cfSelezioanto);
-
-
-                }else JOptionPane.showMessageDialog(null,"Selezionare l'impiegato a cui modificare le ore");
             }
         });
 
@@ -1132,6 +1122,8 @@ public class AreaImpiegato extends JFrame {
                     isIntero = false;
                 }
 
+                int rigaImpSelezionato = table.getSelectedRow();
+
                 int rigaProgettoSelezionata = tabellaProgettiInCorso.getSelectedRow();
 
                 if(rigaProgettoSelezionata >= 0){
@@ -1142,16 +1134,23 @@ public class AreaImpiegato extends JFrame {
 
                             boolean update = false;
 
-                            update = controller.updateOre((String) modelTable.getValueAt(0,4),
+                            update = controller.updateOre((String) modelTable.getValueAt(rigaImpSelezionato,4),
                                     (String) modelloProgettiInCorso.getValueAt(rigaProgettoSelezionata,1),
                                     Integer.parseInt(changeOreField.getText()));
                             if(update){
 
-                                svuotaModelTable(modelTable);
+                                //Aggiornamento tabelle
+                                svuotaModelTable(modelTableCarriera);
+                                svuotaModelTable(modelTableLabResponsabile);
+                                svuotaModelTable(modelTableProgReferente);
+                                svuotaModelTable(modelTableProgResponsabile);
                                 svuotaModelTable(modelloProgettiInCorso);
+                                svuotaModelTable(modelloProgettiInCorsoContribuito);
+                                svuotaModelTable(modelloProgConclusiContr);
 
-                                ricercaPer.setEnabled(true);
-                                table.setEnabled(true);
+                                controller.setModelliInfoImpiegato(modelTableCarriera, modelTableLabResponsabile, modelTableProgReferente,
+                                        modelTableProgResponsabile, modelloProgettiInCorso, modelloProgettiInCorsoContribuito,
+                                        modelloProgConclusiContr, (String) modelTable.getValueAt(rigaImpSelezionato, 4));
 
                                 changeOreField.setText("");
 
@@ -1190,45 +1189,10 @@ public class AreaImpiegato extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int rigaImpSelezionata = table.getSelectedRow();
-
-                if(rigaImpSelezionata >= 0){
-
                     menuGestioneLavori.setVisible(false);
                     panelConcludi.setVisible(true);
                     panelSud.setBorder(bordoFinaleConcludi);
 
-                    table.setEnabled(false);
-                    ricercaPer.setEnabled(false);
-                    ricercaSpecifica.setEnabled(false);
-                    panelloIntervalliData.setVisible(false);
-                    panelloFiltroLab.setVisible(false);
-
-                    String cfSelezioanto = (String) modelTable.getValueAt(rigaImpSelezionata,4);
-
-                    svuotaModelTable(modelTableLabResponsabile);
-                    svuotaModelTable(modelTableProgReferente);
-                    svuotaModelTable(modelTableProgResponsabile);
-                    svuotaModelTable(modelloProgettiInCorso);
-                    svuotaModelTable(modelloProgettiInCorsoContribuito);
-                    svuotaModelTable(modelloProgConclusiContr);
-                    svuotaModelTable(modelTableCarriera);
-
-                    controller.setModelliInfoImpiegato(modelTableCarriera,modelTableLabResponsabile,modelTableProgReferente,
-                            modelTableProgResponsabile,modelloProgettiInCorso,modelloProgettiInCorsoContribuito,
-                            modelloProgConclusiContr,(String) modelTable.getValueAt(rigaImpSelezionata,4));
-
-                    svuotaModelTable(modelTable);
-                    svuotaModelTable(modelTableLabResponsabile);
-                    svuotaModelTable(modelTableProgReferente);
-                    svuotaModelTable(modelTableProgResponsabile);
-                    svuotaModelTable(modelloProgettiInCorsoContribuito);
-                    svuotaModelTable(modelloProgConclusiContr);
-                    svuotaModelTable(modelTableCarriera);
-
-                    controller.setImpiegatiPerCF(modelTable, cfSelezioanto);
-
-                }else JOptionPane.showMessageDialog(null,"Selezionare l'impiegato a cui va concluso un progetto");
             }
         });
 
@@ -1241,18 +1205,27 @@ public class AreaImpiegato extends JFrame {
 
                 int progettoSelezionato = tabellaProgettiInCorso.getSelectedRow();
 
+                int impSelezionato = table.getSelectedRow();
+
                 if(progettoSelezionato >= 0){
 
-                    flag = controller.insertLavoroContribuito((String) modelTable.getValueAt(0,4),
+                    flag = controller.insertLavoroContribuito((String) modelTable.getValueAt(impSelezionato,4),
                             (String) modelloProgettiInCorso.getValueAt(progettoSelezionato,1));
 
                     if(flag){
 
-                        svuotaModelTable(modelTable);
+                        //Aggiornamento tabelle
+                        svuotaModelTable(modelTableCarriera);
+                        svuotaModelTable(modelTableLabResponsabile);
+                        svuotaModelTable(modelTableProgReferente);
+                        svuotaModelTable(modelTableProgResponsabile);
                         svuotaModelTable(modelloProgettiInCorso);
+                        svuotaModelTable(modelloProgettiInCorsoContribuito);
+                        svuotaModelTable(modelloProgConclusiContr);
 
-                        table.setEnabled(true);
-                        ricercaPer.setEnabled(true);
+                        controller.setModelliInfoImpiegato(modelTableCarriera, modelTableLabResponsabile, modelTableProgReferente,
+                                modelTableProgResponsabile, modelloProgettiInCorso, modelloProgettiInCorsoContribuito,
+                                modelloProgConclusiContr, (String) modelTable.getValueAt(impSelezionato, 4));
 
                         panelConcludi.setVisible(false);
                         menuGestioneLavori.setVisible(true);
@@ -1268,9 +1241,6 @@ public class AreaImpiegato extends JFrame {
         backFromConcludi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                svuotaModelTable(modelTable);
-                svuotaModelTable(modelloProgettiInCorso);
 
                 table.setEnabled(true);
                 ricercaPer.setEnabled(true);
@@ -1338,6 +1308,7 @@ public class AreaImpiegato extends JFrame {
                 dispose();
             }
         });
+
     }
 
     private void svuotaModelTable(DefaultTableModel model) {
