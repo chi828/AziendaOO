@@ -124,7 +124,7 @@ public class AreaProgetti {
                 if(progettiTable.getSelectedRow() == -1){
                     JOptionPane.showMessageDialog(frame, "Seleziona un progetto");
                 } else {
-                    controller.concludiProgetto(controller.getProgettiInCorso().get(progettiTable.getSelectedRow()), new Date());
+                    controller.concludiProgetto(progettiTable.getSelectedRow(), new Date());
                     aggiornaTabellaProgetti();
                 }
             }
@@ -174,10 +174,7 @@ public class AreaProgetti {
                     return;
                 }
                 try {
-                    controller.rimuoviAssegnazione(controller.getProgettiInCorso().
-                            get(progettiTable.getSelectedRow()), controller.getProgettiInCorso().
-                            get(progettiTable.getSelectedRow()).getLaboratoriAssegnati().
-                            get(laboratoriAssegnatiTable.getSelectedRow()));
+                    controller.rimuoviAssegnazione(progettiTable.getSelectedRow(), laboratoriAssegnatiTable.getSelectedRow());
                     aggiornaTabellaLaboratoriAssegnati();
                 } catch(RuntimeException e1) {
                     JOptionPane.showMessageDialog(frame, e1.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);

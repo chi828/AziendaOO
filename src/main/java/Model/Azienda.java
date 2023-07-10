@@ -17,9 +17,9 @@ public class Azienda {
      * Tutte gli attributi sono inizializzati come ArrayList vuote.
      */
     public Azienda(){
-        this.impiegati = new ArrayList<Impiegato>();
-        this.laboratori = new ArrayList<Laboratorio>();
-        this.progetti = new ArrayList<Progetto>();
+        this.impiegati = new ArrayList<>();
+        this.laboratori = new ArrayList<>();
+        this.progetti = new ArrayList<>();
     }
 
     /**
@@ -89,7 +89,7 @@ public class Azienda {
      * @return ArrayList di impiegati con ruolo di dirigente
      */
     public ArrayList<Impiegato> getDirigenti() {
-        ArrayList<Impiegato> result = new ArrayList<Impiegato>();
+        ArrayList<Impiegato> result = new ArrayList<>();
         for (Impiegato impiegato: getImpiegati()) {
             if(impiegato.getDirigente() != null) {
                 result.add(impiegato);
@@ -104,9 +104,9 @@ public class Azienda {
      * @return the seniors
      */
     public ArrayList<Senior> getSeniors() {
-        ArrayList<Senior> result = new ArrayList<Senior>();
+        ArrayList<Senior> result = new ArrayList<>();
         for (Impiegato impiegato: getImpiegati()) {
-            if(impiegato.getCategoria() == "senior") {
+            if(impiegato.getCategoria().equals("senior")) {
                 result.add((Senior) impiegato);
             }
         }
@@ -169,8 +169,8 @@ public class Azienda {
         for(int i=0; i<this.impiegati.size(); i++){
 
             if(this.impiegati.get(i).getCf().equals(cf)){
-
                 this.impiegati.remove(i);
+                break;
             }
         }
     }
@@ -185,14 +185,14 @@ public class Azienda {
         for (Progetto progetto: progetti
              ) {
             if(progetto.getLaboratoriAssegnati().contains(laboratorio)) {
-                throw new RuntimeException("Ci sono progetti assegnati al laboratorio");
+                throw new RuntimeException("Eliminazione annullata. Ci sono progetti assegnati al laboratorio");
             }
         }
 
         for (Impiegato impiegato: impiegati) {
             if(impiegato.getAfferenza() != null){
                 if (impiegato.getAfferenza().equals(laboratorio)) {
-                    throw new RuntimeException("Ci sono impiegati che afferiscono al laboratorio");
+                    throw new RuntimeException("Eliminazione annullata. Ci sono impiegati che afferiscono al laboratorio");
                 }
             }
         }
@@ -238,7 +238,7 @@ public class Azienda {
             passaggioSenior.setTime(date);
             passaggioSenior.add(Calendar.YEAR, 7);
              if(currentDate.after(passaggioSenior)) {
-                 if(impiegato.getCategoria() != "senior") {
+                 if(!impiegato.getCategoria().equals("senior")) {
                      Senior nuovaCategoria;
                      if(impiegato.getDirigente() != null) {
                           nuovaCategoria = new Senior(impiegato.getNome(), impiegato.getCognome(),
@@ -268,7 +268,7 @@ public class Azienda {
                      nuovaCategoria.setContributiPassati(impiegato.getContributiPassati());
                  }
              } else if(currentDate.after(passaggioMiddle)) {
-                 if(impiegato.getCategoria() != "middle") {
+                 if(impiegato.getCategoria().equals("middle")) {
                      Middle nuovaCategoria;
                      if(impiegato.getDirigente() != null) {
                          nuovaCategoria = new Middle(impiegato.getNome(), impiegato.getCognome(),
@@ -288,7 +288,7 @@ public class Azienda {
                                  impiegato.getCf(), impiegato.getDataDiAssunzione(), impiegato.getStipendio(),
                                  impiegato.getAfferenza(), passaggioMiddle.getTime());
                      }
-                     ArrayList<Lavorare> lavoriImpiegato = new ArrayList<Lavorare>();
+                     ArrayList<Lavorare> lavoriImpiegato = new ArrayList<>();
                      for (Lavorare lavorare: impiegato.getLavoriProgettiAssegnati()
                      ) {
                          lavoriImpiegato.add(new Lavorare(nuovaCategoria, lavorare.getProgettoinCorso(),
@@ -315,11 +315,10 @@ public class Azienda {
     public ProgettoConcluso concludiProgetto(ProgettoInCorso progetto, Date dataFine) {
         //Rimozione progetto in corso dall'azienda
         progetti.remove(progetto);
-        //Aggiunzione progetto concluso
+        //Crazione progetto concluso
         ProgettoConcluso progettoConcluso = new ProgettoConcluso(progetto.getNome(), progetto.getCup(), progetto.getDataInizio(),
                 progetto.getLaboratoriAssegnati(), progetto.getReferenteScientifico(), progetto.getResponsabile(),
                 dataFine);
-        addProgetti(progettoConcluso);
 
         for (Impiegato impiegato: impiegati
              ) {
@@ -327,7 +326,7 @@ public class Azienda {
             ArrayList<Lavorare> daEliminare = new ArrayList<>();
             for (Lavorare lavorare: impiegato.getLavoriProgettiAssegnati()
                  ) {
-                if(lavorare.getProgettoinCorso().equals(getProgettiInCorso())) {
+                if(lavorare.getProgettoinCorso().equals(progetto)) {
                     daEliminare.add(lavorare);
                 }
             }
@@ -342,7 +341,7 @@ public class Azienda {
                 impiegato.addContributoPassato(progettoConcluso);
             }
         }
-        progetti.add(progettoConcluso);
+        addProgetti(progettoConcluso);
         return progettoConcluso;
     }
 }

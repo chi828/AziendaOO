@@ -63,7 +63,10 @@ public class Controller {
      * nel parametro afferenze. Similmente, non ci si aspetta di avere i progetti già pronti
      * in memoria, dunque anche gli attributi contributiPassati e lavoriProgettiAssegnati di
      * {@link Impiegato} sono vuoti al termine dell'esecuzione di questo metodo.
-     * @param afferenze
+     * @param afferenze array list di array di stringhe. Alla fine dell'esecuzione del metodo ciascun
+     *                  array contiene, in posizione 0, il nome del laboratorio, in posizione 1 il topic.
+     *                  L'array in posizione i rappresenta il laboratorio d'afferenza dell'i-esimo impiegato
+     *                  in azienda.
      */
     private void loadImpiegati(ArrayList<String[]> afferenze) {
 
@@ -340,8 +343,8 @@ public class Controller {
      * Trova nell'ArrayList laboratori nell'attributo azienda {@link Azienda} di Controller, il laboratorio che ha
      * sia nome uguale al valore della stringa nel paramentro nome, che topic uguale al valore della stringa nel
      * parametro topic. Se non è presente un laboratorio con tali nome e topic, restituisce null.
-     * @param nome
-     * @param topic
+     * @param nome  nome del laboratorio da cercare.
+     * @param topic topic del laboratorio da cercare.
      * @return      Restituisce l'ogetto della classe Laboratorio che ha per attributo nome la stringa passata come
      * primo parametro e per topic la stringa passata come secondo parametro. Se tale laboratorio non esiste nel sistema,
      * restituisce null
@@ -1535,16 +1538,16 @@ public class Controller {
     /**
      * Concludi progetto.
      *
-     * @param progetto the progetto
+     * @param indiceProgetto the progetto
      * @param dataFine the data fine
      */
 //Modifiche
-    public void concludiProgetto(ProgettoInCorso progetto, Date dataFine) {
+    public void concludiProgetto(int indiceProgetto, Date dataFine) {
+        ProgettoInCorso progetto = getProgettiInCorso().get(indiceProgetto);
         //In memoria
        azienda.concludiProgetto(progetto, dataFine);
 
         //In database
-
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dataInizioString = dateFormat.format(progetto.getDataInizio());
         String dataFineString = dateFormat.format(dataFine);
@@ -1573,40 +1576,41 @@ public class Controller {
             throw new RuntimeException("Laboratorio non trovato");
         }
 
-        if(progettoInCorso.getLaboratoriAssegnati().contains(laboratorio)) {
-            throw new RuntimeException("Questo laboratorio è già assegnato al progetto");
-        }
-
         //In memoria
-        if(progettoInCorso.getLaboratoriAssegnati().size() < 3) {
-            progettoInCorso.getLaboratoriAssegnati().add(laboratorio);
+        progettoInCorso.addAssegnazioneLaboratorio(laboratorio);
 
-            //In database
-            ProgettoInCorsoDAO progettoInCorsoDAO = new ProgettoInCorsoImplementazionePostgresDAO();
-            progettoInCorsoDAO.addAssegnazione(progettoInCorso.getCup(), laboratorio.getNome(),
-                    laboratorio.getTopic());
-        } else throw new RuntimeException("Questo progetto ha già raggiunto il numero massimo di laboratori assegnabili");
+        //In database
+        ProgettoInCorsoDAO progettoInCorsoDAO = new ProgettoInCorsoImplementazionePostgresDAO();
+        progettoInCorsoDAO.addAssegnazione(progettoInCorso.getCup(), laboratorio.getNome(),
+                laboratorio.getTopic());
 
     }
 
     /**
      * Rimuovi assegnazione.
      *
-     * @param progettoInCorso the progetto in corso
-     * @param laboratorio     the laboratorio
+     * @param indiceProgettoInCorso the progetto in corso
+     * @param indiceLaboratorio     the laboratorio
      * @throws RuntimeException the runtime exception
      */
-    public void rimuoviAssegnazione(ProgettoInCorso progettoInCorso, Laboratorio laboratorio) throws RuntimeException {
+    public void rimuoviAssegnazione(int indiceProgettoInCorso, int indiceLaboratorio) throws RuntimeException {
+        ProgettoInCorso progettoInCorso = getProgettiInCorso().get(indiceProgettoInCorso);
+        ArrayList<String> nomiLab = new ArrayList<>();
+        ArrayList<String> topicLab = new ArrayList<>();
+        getLaboratoriAssegnati(indiceProgettoInCorso, nomiLab, topicLab, new ArrayList<>());
+
+        Laboratorio laboratorio = findLaboratorio(nomiLab.get(indiceLaboratorio), topicLab.get(indiceLaboratorio));
+
         //Controlliamo che non ci siano impiegati del laboratorio che ancora lavorano al progetto
         Boolean violazione = false;
 
         for (Impiegato impiegato : impiegatiAfferenti(laboratorio)
-             ) {
+        ) {
             for (Lavorare lavorare : impiegato.getLavoriProgettiAssegnati()
-                 ) {
+            ) {
                 if(lavorare.getProgettoinCorso().equals(progettoInCorso)) {
                     violazione = true;
-                            break;
+                    break;
                 }
             }
         }
@@ -1617,7 +1621,7 @@ public class Controller {
         }
 
         //in memoria
-        progettoInCorso.getLaboratoriAssegnati().remove(laboratorio);
+        progettoInCorso.removeAssegnazioneLaboratorio(laboratorio);
 
         //in database
         ProgettoInCorsoDAO progettoInCorsoDAO = new ProgettoInCorsoImplementazionePostgresDAO();
@@ -1703,7 +1707,7 @@ public class Controller {
      * @param topic   the topic
      * @return the boolean
      */
-    public boolean updateAfferenzaImp(String cf, String nomeLab, String topic){
+    public boolean updateAfferenzaImp(String cf, String nomeLab, String topic) {
 
         boolean flag = false;
 

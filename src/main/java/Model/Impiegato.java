@@ -47,8 +47,8 @@ public class Impiegato {
         this.dataDiAssunzione = dataDiAssunzione;
         this.stipendio = stipendio;
         this.afferenza = laboratorio;
-        this.lavoriProgettiAssegnati = new ArrayList<Lavorare>();
-        this.contributiPassati = new ArrayList<Progetto>();
+        this.lavoriProgettiAssegnati = new ArrayList<>();
+        this.contributiPassati = new ArrayList<>();
     }
 
     /**
@@ -79,8 +79,8 @@ public class Impiegato {
         this.dataDiAssunzione = dataDiAssunzione;
         this.stipendio = stipendio;
         this.afferenza = laboratorio;
-        this.lavoriProgettiAssegnati = new ArrayList<Lavorare>();
-        this.contributiPassati = new ArrayList<Progetto>();
+        this.lavoriProgettiAssegnati = new ArrayList<>();
+        this.contributiPassati = new ArrayList<>();
 
         if (passagioDirigente != null) {
             this.dirigente = new Dirigente(passagioDirigente, this);

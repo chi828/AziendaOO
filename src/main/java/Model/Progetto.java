@@ -8,12 +8,12 @@ import java.util.Date;
  */
 public class Progetto {
 
-    private String nome;
-    private String cup;
-    private Date dataInizio;
-    private ArrayList<Laboratorio> laboratoriAssegnati;
-    private Senior referenteScientifico;
-    private Dirigente responsabile;
+    protected String nome;
+    protected String cup;
+    protected Date dataInizio;
+    protected ArrayList<Laboratorio> laboratoriAssegnati;
+    protected Senior referenteScientifico;
+    protected Dirigente responsabile;
 
     /**
      * Instantiates a new Progetto.
@@ -25,7 +25,11 @@ public class Progetto {
      * @param referenteScientifico the referente scientifico
      * @param responsabile         the responsabile
      */
-    public Progetto(String nome, String cup, Date dataInizio, ArrayList<Laboratorio> laboratoriAssegnati, Senior referenteScientifico, Dirigente responsabile){
+    public Progetto(String nome, String cup, Date dataInizio, ArrayList<Laboratorio> laboratoriAssegnati,
+                    Senior referenteScientifico, Dirigente responsabile) throws RuntimeException{
+        if(laboratoriAssegnati.size() > 3) {
+            throw new RuntimeException("Il numero di laboratori assegnati supera il massimo di 3.");
+        }
 
         this.nome = nome;
         this.cup = cup;
