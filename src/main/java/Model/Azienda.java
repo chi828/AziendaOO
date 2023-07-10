@@ -200,21 +200,6 @@ public class Azienda {
         laboratori.remove(laboratorio);
     }
 
-    /**
-     * Remove progetto.
-     *
-     * @param cup the cup
-     */
-    public void removeProgetto(String cup){
-        for(int i=0; i<this.progetti.size(); i++){
-            Progetto progetto = this.progetti.get(i);
-
-            if(progetto.getCup().equals(cup)){
-                this.progetti.remove(i);
-                break;
-            }
-        }
-    }
 
     /**
      * Verifica che ogni impiegato in azienda appartenza alla classe di specializzazione corretta
