@@ -13,8 +13,8 @@ public class Dirigente {
     /**
      * Instantiates a new Dirigente.
      *
-     * @param passaggioDirigente the passaggio dirigente
-     * @param impiegato          the impiegato
+     * @param passaggioDirigente La data in cui l'impiegato è stato promosso a dirigente.
+     * @param impiegato          L'impiegato che ha acquisito il ruolo di dirigente.
      */
     public Dirigente(Date passaggioDirigente, Impiegato impiegato) {
         this.passaggioDirigente = passaggioDirigente;
@@ -31,7 +31,7 @@ public class Dirigente {
     /**
      * Get passaggio dirigente date.
      *
-     * @return the date
+     * @return Data in cui l'impiegato è stato promosso a dirigente.
      */
     public Date getPassaggioDirigente(){return passaggioDirigente;}
 }

@@ -1,7 +1,8 @@
 package Model;
 
 /**
- * The type Lavorare.
+ * The type Lavorare. Associazione fra Impiegato e Progetto. Rappresenta il lavoro che è assegnato ad un
+ * impiegato su uno specifico progetto.
  */
 public class Lavorare {
 
@@ -12,9 +13,9 @@ public class Lavorare {
     /**
      * Instantiates a new Lavorare.
      *
-     * @param impiegato the impiegato
-     * @param progetto  the progetto
-     * @param ore       the ore
+     * @param impiegato L'impiegato che lavora al progetto.
+     * @param progetto  Il progetto su cui l'impiegato lavora.
+     * @param ore       Rappresenta il numero di ore settimanali che l'impiegato ha assegnate al progetto.
      */
     public Lavorare(Impiegato impiegato, ProgettoInCorso progetto, int ore){
         this.impiegato = impiegato;
@@ -47,24 +48,6 @@ public class Lavorare {
      */
     public int getOre(){
         return ore;
-    }
-
-    /**
-     * Set impiegato.
-     *
-     * @param impiegato the impiegato
-     */
-    public void setImpiegato(Impiegato impiegato){
-        this.impiegato = impiegato;
-    }
-
-    /**
-     * Set progetto.
-     *
-     * @param progetto the progetto
-     */
-    public void setProgetto(ProgettoInCorso progetto){
-        this.progetto = progetto;
     }
 
     /**

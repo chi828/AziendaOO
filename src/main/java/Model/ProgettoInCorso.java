@@ -48,7 +48,8 @@ public class ProgettoInCorso extends Progetto {
     public void removeAssegnazioneLaboratorio(Laboratorio laboratorio) throws RuntimeException {
 
         if(laboratoriAssegnati.size() == 1) {
-            throw new RuntimeException("Rimozione annullata: il progetto deve essere assegnato ad almeno un laboratorio");
+            throw new RuntimeException("Rimozione annullata: un progetto in corso deve essere assegnato ad" +
+                    " almeno un laboratorio");
         }
         laboratoriAssegnati.add(laboratorio);
     }

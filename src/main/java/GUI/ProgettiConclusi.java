@@ -19,6 +19,7 @@ public class ProgettiConclusi {
     private JButton indietroBtn;
     private JPanel panel1;
     private JTable laboratoriAssegnatiTable;
+    private JButton eliminaProgettoButton;
     /**
      * The Frame.
      */
@@ -40,6 +41,7 @@ public class ProgettiConclusi {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(chiamante);
         this.controller = controller;
 
         //Funzionamento JTable
@@ -84,6 +86,18 @@ public class ProgettiConclusi {
                 chiamante.setVisible(true);
                 frame.setVisible(false);
                 frame.dispose();
+            }
+        });
+
+        eliminaProgettoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(progettiTable.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(frame,"Seleziona un progetto.");
+                    return;
+                }
+                controller.removeProgettoConcluso(progettiTable.getSelectedRow());
+                aggiornaTabellaProgetti();
             }
         });
 

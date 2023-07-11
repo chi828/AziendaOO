@@ -45,7 +45,7 @@ public class AreaLaboratorio {
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(chiamante);
         frame.setVisible(true);
 
         this.controller = controller;

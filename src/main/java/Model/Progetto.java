@@ -27,8 +27,10 @@ public class Progetto {
      */
     public Progetto(String nome, String cup, Date dataInizio, ArrayList<Laboratorio> laboratoriAssegnati,
                     Senior referenteScientifico, Dirigente responsabile) throws RuntimeException{
-        if(laboratoriAssegnati.size() > 3) {
-            throw new RuntimeException("Il numero di laboratori assegnati supera il massimo di 3.");
+        if (laboratoriAssegnati != null){
+            if (laboratoriAssegnati.size() > 3) {
+                throw new RuntimeException("Il numero di laboratori assegnati supera il massimo di 3.");
+            }
         }
 
         this.nome = nome;

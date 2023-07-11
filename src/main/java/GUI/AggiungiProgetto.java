@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * The type Aggiungi progetto.
+ * Interfaccia utente per l'apertura di nuovi progetti.
  */
 public class AggiungiProgetto {
     private JTextField nomeText;
@@ -44,7 +44,6 @@ public class AggiungiProgetto {
         frame.pack();
         frame.setLocationRelativeTo(chiamante);
         frame.setSize(600,400);
-        frame.setResizable(false);
         frame.setVisible(true);
 
         //Selezione data inizio
@@ -71,9 +70,9 @@ public class AggiungiProgetto {
             referenteScientificoBox.addItem(senior);
         }
 
-        ArrayList<String> nomiLaboratori = new ArrayList<String>();
-        ArrayList<String> topicLaboratori = new ArrayList<String>();
-        ArrayList<String> responsabiliScientifici = new ArrayList<String>();
+        ArrayList<String> nomiLaboratori = new ArrayList<>();
+        ArrayList<String> topicLaboratori = new ArrayList<>();
+        ArrayList<String> responsabiliScientifici = new ArrayList<>();
         controller.getLaboratori(nomiLaboratori, topicLaboratori, responsabiliScientifici);
         //laboratorio 1
         for (int i = 0; i<nomiLaboratori.size(); i++) {
@@ -120,9 +119,9 @@ public class AggiungiProgetto {
                 }
 
                 int indiceResponsabile = responsabileBox.getSelectedIndex();
-                int indicieReferenteScientifico = referenteScientificoBox.getSelectedIndex();
+                int indiceReferenteScientifico = referenteScientificoBox.getSelectedIndex();
 
-                ArrayList<Integer> assegnazioni = new ArrayList<Integer>();
+                ArrayList<Integer> assegnazioni = new ArrayList<>();
 
                 assegnazioni.add(laboratorio1Box.getSelectedIndex());
                 if(laboratorio2Box.getSelectedIndex() > 0 &&
@@ -132,7 +131,7 @@ public class AggiungiProgetto {
 
                 if(laboratorio3Box.getSelectedIndex() > 0 &&
                         laboratorio3Box.getSelectedIndex()-1 != laboratorio1Box.getSelectedIndex() &&
-                        laboratorio3Box.getSelectedIndex()-1 != laboratorio2Box.getSelectedIndex() ) {
+                        laboratorio3Box.getSelectedIndex() != laboratorio2Box.getSelectedIndex()) {
                     assegnazioni.add(laboratorio3Box.getSelectedIndex() - 1);
                 }
 
@@ -142,7 +141,7 @@ public class AggiungiProgetto {
                 }
 
                 try {
-                    controller.addProgettoInCorso(nome, cup, dataInizio, indiceResponsabile, indicieReferenteScientifico, assegnazioni);
+                    controller.addProgettoInCorso(nome, cup, dataInizio, indiceResponsabile, indiceReferenteScientifico, assegnazioni);
                 } catch (RuntimeException e1) {
                     JOptionPane.showMessageDialog(frame, e1.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
                     return;

@@ -50,4 +50,10 @@ public interface ProgettoInCorsoDAO {
      * @param cf  the cf
      */
     void setResponsabile(String cup, String cf);
+
+    /**
+     * Elimina un progetto in corso dal database.
+     * @param cup progetto da eliminare.
+     */
+    public void removeProgettoInCorso(String cup);
 }

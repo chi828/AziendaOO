@@ -1,5 +1,7 @@
 package Model;
 
+import DAO.ProgettoConclusoDAO;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -84,7 +86,7 @@ public class Azienda {
     }
 
     /**
-     * Reperisce tutti gli impiegati che ricoprono il ruolo di dirigente
+     * Reperisce tutti gli impiegati che ricoprono il ruolo di dirigente.
      *
      * @return ArrayList di impiegati con ruolo di dirigente
      */
@@ -99,7 +101,7 @@ public class Azienda {
     }
 
     /**
-     * Gets seniors.
+     * Recupera dall'array list impiegato, solo gli impiegati appartenenti alla categoria senior.
      *
      * @return the seniors
      */
@@ -114,7 +116,8 @@ public class Azienda {
     }
 
     /**
-     * Add impiegato.
+     * Se non esistono altri impiegati con lo stesso codice fiscale in azienda, inserisce il nuovo impiegato, altrimenti
+     * impedisce l'inserimento.
      *
      * @param impiegato the impiegato
      */
@@ -131,7 +134,8 @@ public class Azienda {
     }
 
     /**
-     * Add laboratorio.
+     * Se non esistono laboratori con la stessa coppia di topic e nome, inserisce il nuovo laboratorio in azienda,
+     * altimenti impdisce l'inserimento.
      *
      * @param laboratorio the laboratorio
      */
@@ -146,9 +150,10 @@ public class Azienda {
     }
 
     /**
-     * Add progetti.
+     * Se non esistono in azienda progetti con lo stesso nome o lo stesso cup, inserisce il progetto in azienda,
+     * altrimenti annulla l'inserimento
      *
-     * @param progetto the progetto
+     * @param progetto Il progetto da aggiungere
      */
     public void addProgetti(Progetto progetto) throws RuntimeException {
         for (Progetto prog: progetti
@@ -161,32 +166,40 @@ public class Azienda {
     }
 
     /**
-     * Remove impiegato.
+     * Rimuove l'impiegato dall'azienda
      *
-     * @param cf the cf
+     * @param impiegato impiegato da eliminare.
      */
-    public void removeImpiegato(String cf){
-        for(int i=0; i<this.impiegati.size(); i++){
-
-            if(this.impiegati.get(i).getCf().equals(cf)){
-                this.impiegati.remove(i);
-                break;
-            }
-        }
+    public void removeImpiegato(Impiegato impiegato) {
+        impiegati.remove(impiegato);
     }
 
     /**
-     * Remove laboratorio.
+     * Se non esistono progetti assegnati al laboratorio o impiegati che vi afferiscono, elimina dall'azienda il
+     * laboratorio passato per parametro, altrimenti annulla l'eliminazione.
      *
-     * @param laboratorio   the laboratorio
+     * @param laboratorio   Il laboratorio da eliminare
      */
     public void removeLaboratorio(Laboratorio laboratorio) {
 
+        ArrayList<ProgettoConcluso> assegnazioniDaEliminare = new ArrayList<>();
+
         for (Progetto progetto: progetti
              ) {
+
             if(progetto.getLaboratoriAssegnati().contains(laboratorio)) {
-                throw new RuntimeException("Eliminazione annullata. Ci sono progetti assegnati al laboratorio");
+                if(progetto.isConcluso()){
+                    assegnazioniDaEliminare.add((ProgettoConcluso) progetto);
+                } else {
+                    throw new RuntimeException("Eliminazione annullata. Ci sono progetti in corso " +
+                            "assegnati al laboratorio");
+                }
             }
+        }
+
+        for (ProgettoConcluso progetto: assegnazioniDaEliminare
+             ) {
+            progetto.getLaboratoriAssegnati().remove(laboratorio);
         }
 
         for (Impiegato impiegato: impiegati) {
@@ -329,4 +342,45 @@ public class Azienda {
         addProgetti(progettoConcluso);
         return progettoConcluso;
     }
+
+    /**
+     * Elimina dell'azienda il progetto che riceve per parametro e i contributi passati e lavorare che vi si riferiscono.
+     * @param progetto progetto da eliminare.
+     */
+    public void removeProgettoInCorso(ProgettoInCorso progetto) {
+            for (Impiegato impiegato: impiegati
+                 ) {
+                ArrayList<Lavorare> lavoriDaEliminare = new ArrayList<>();
+                for (Lavorare lavorare: impiegato.getLavoriProgettiAssegnati()
+                     ) {
+                    if(lavorare.getProgettoinCorso().equals(progetto)) {
+                        lavoriDaEliminare.add(lavorare);
+                    }
+                }
+                for (Lavorare lavorare: lavoriDaEliminare
+                     ) {
+                    impiegato.getLavoriProgettiAssegnati().remove(lavorare);
+                }
+                if (impiegato.getContributiPassati().contains(progetto)) {
+                    impiegato.getContributiPassati().remove(progetto);
+                }
+            }
+
+        progetti.remove(progetto);
+    }
+
+    /**
+     * Elimina dell'azienda il progetto che riceve per parametro e i contributi passati e lavorare che vi si riferiscono.
+     * @param progetto progetto da eliminare.
+     */
+    public void removeProgettoConcluso(ProgettoConcluso progetto) {
+        for (Impiegato impiegato: impiegati
+             ) {
+            if (impiegato.getContributiPassati().contains(progetto)) {
+                impiegato.getContributiPassati().remove(progetto);
+            }
+        }
+        progetti.remove(progetto);
+    }
+
 }

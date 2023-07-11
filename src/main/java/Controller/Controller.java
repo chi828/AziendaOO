@@ -1946,7 +1946,7 @@ public class Controller {
 
         for(Impiegato imp : getImpiegati()){
 
-            if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+            if(imp.getCf().equalsIgnoreCase(cf)){
 
                 impiegato = imp;
 
@@ -2020,10 +2020,36 @@ public class Controller {
             }
 
             if(flag) {
-                getImpiegati().remove(impDaEliminare);
+                azienda.removeImpiegato(impDaEliminare);
             }
         }
 
         return flag;
     }
+
+    public void removeProgettoInCorso(int indiceProgetto) {
+
+        //in memoria
+        ProgettoInCorso progetto = getProgettiInCorso().get(indiceProgetto);
+
+        azienda.removeProgettoInCorso(progetto);
+
+        //in database
+        ProgettoInCorsoDAO progettoInCorsoDAO = new ProgettoInCorsoImplementazionePostgresDAO();
+        progettoInCorsoDAO.removeProgettoInCorso(progetto.getCup());
+    }
+
+    public void removeProgettoConcluso(int indiceProgetto) {
+
+        //in memoria
+        ProgettoConcluso progetto = getProgettiConclusi().get(indiceProgetto);
+
+        azienda.removeProgettoConcluso(progetto);
+        //in database
+        ProgettoConclusoDAO progettoConclusoDAO = new ProgettoConclusoImplementazionePostgresDAO();
+
+        progettoConclusoDAO.removeProgettoConcluso(progetto.getCup());
+    }
+
+
 }

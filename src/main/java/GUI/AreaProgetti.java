@@ -34,6 +34,7 @@ public class AreaProgetti {
     private JButton rimuoviButton;
     private JTextField nomeTextField;
     private JTextField topicTextField;
+    private JButton eliminaProgettoButton;
 
     /**
      * The Controller.
@@ -219,6 +220,18 @@ public class AreaProgetti {
                 } catch (RuntimeException e1) {
                     JOptionPane.showMessageDialog(frame, e1.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+
+        eliminaProgettoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(progettiTable.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(frame,"Seleziona un progetto.");
+                    return;
+                }
+                controller.removeProgettoInCorso(progettiTable.getSelectedRow());
+                aggiornaTabellaProgetti();
             }
         });
 

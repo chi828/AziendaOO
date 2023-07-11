@@ -36,6 +36,7 @@ public class AggiungiLaboratorio {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(chiamante);
+        frame.setSize(500,240);
         frame.setVisible(true);
 
         //Combo box

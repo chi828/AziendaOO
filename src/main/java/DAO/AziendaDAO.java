@@ -27,7 +27,8 @@ public interface AziendaDAO {
      * @param afferenze       the afferenze
      * @param stipendi        the stipendi
      */
-    public void readAllJuniorNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
+    public void readAllJuniorNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
+                                          ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
      * Read all junior dirigenti.
@@ -37,7 +38,8 @@ public interface AziendaDAO {
      * @param afferenze       the afferenze
      * @param stipendi        the stipendi
      */
-    public void readAllJuniorDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
+    public void readAllJuniorDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
+                                       ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
      * Read all middle non dirigenti.
@@ -47,7 +49,8 @@ public interface AziendaDAO {
      * @param afferenze       the afferenze
      * @param stipendi        the stipendi
      */
-    public void readAllMiddleNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
+    public void readAllMiddleNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
+                                          ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
      * Read all middle dirigenti.

@@ -101,4 +101,21 @@ public class ProgettoInCorsoImplementazionePostgresDAO implements ProgettoInCors
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Elimina un progetto in corso dal database di postgres.
+     * @param cup cup del progetto da eliminare.
+     */
+    public void removeProgettoInCorso(String cup) {
+        PreparedStatement removeProgettoInCorso;
+        try {
+            removeProgettoInCorso = connection.prepareStatement(
+                    "DELETE FROM progetto_in_corso WHERE cup = '" + cup + "'"
+            );
+            removeProgettoInCorso.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
