@@ -1363,6 +1363,46 @@ public class Controller {
      */
     public boolean insertLavorare(String cf, String cup, int ore){
 
+        //Controllo esistenza progetto
+        if(findProgetto(cup) == null){
+
+            JOptionPane.showMessageDialog(null,"Progetto da assegnare inesistente", "Errore", JOptionPane.ERROR_MESSAGE);
+
+            return false;
+        }
+
+        //Controllo che il progetto da assegnare sia assegnato allo stesso laboratorio per cui lavora l'impiegato
+        for(Impiegato imp : getImpiegati()){
+
+            if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+
+                if(imp.getAfferenza() != null){
+
+                    for(Progetto prog : getProgetti()){
+
+                        if(prog.getCup().toLowerCase().equals(cup.toLowerCase())){
+
+                            if(!prog.getLaboratoriAssegnati().contains(imp.getAfferenza())){
+
+                                JOptionPane.showMessageDialog(null,"Progetto da assegnare non corrisponde ai progetti assegnati al laboratorio per cui lavora l'impiegato", "Errore", JOptionPane.ERROR_MESSAGE);
+
+                                return false;
+
+                            } else break;
+                        }
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null,"L'impiegato non lavora per nessun laboratorio, assegnare prima un laboratorio", "Errore", JOptionPane.ERROR_MESSAGE);
+
+                    return false;
+                }
+
+                break;
+            }
+        }
+
         boolean flag = false;
 
         //Inserimento lavorare in DB
@@ -1711,6 +1751,31 @@ public class Controller {
 
         boolean flag = false;
 
+        //Verifica che il laboratorio esiste
+       if(findLaboratorio(nomeLab, topic) == null){
+
+           JOptionPane.showMessageDialog(null,"Laboratorio inesistente", "Errore", JOptionPane.ERROR_MESSAGE);
+
+           return false;
+       }
+
+        //Verifica che non lavoro per qualche progetto
+        for(Impiegato imp : getImpiegati()){
+
+            if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+
+                if(imp.getLavoriProgettiAssegnati() != null && imp.getLavoriProgettiAssegnati().size() > 0){
+
+                    JOptionPane.showMessageDialog(null,"Prima di assegnare un nuovo laboratorio, concludere tutti i lavori", "Errore", JOptionPane.ERROR_MESSAGE);
+
+                    return false;
+
+                }
+
+                break;
+            }
+        }
+
         //Update in DB
         ImpiegatoDAO updateLab = new ImpiegatoImplementazionePostgresDAO();
         flag = updateLab.updateAfferenza(cf,nomeLab,topic);
@@ -1876,6 +1941,56 @@ public class Controller {
      * @return the boolean
      */
     public boolean deleteImpiegato(String cf){
+
+        Impiegato impiegato = null;
+
+        for(Impiegato imp : getImpiegati()){
+
+            if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+
+                impiegato = imp;
+
+                break;
+            }
+        }
+
+        if(impiegato.getLavoriProgettiAssegnati() != null && impiegato.getLavoriProgettiAssegnati().size() > 0){
+
+            JOptionPane.showMessageDialog(null,"L'impiegato da eliminare ha dei lavori assegnati", "Erore", JOptionPane.ERROR_MESSAGE);
+
+            return false;
+        }
+
+        for(Laboratorio lab : getLaboratori()){
+
+            if(lab.getResponsabileScientifico() == impiegato){
+
+                JOptionPane.showMessageDialog(null,"L'impiegato da eliminare è responsabile di un laboratorio", "Erore", JOptionPane.ERROR_MESSAGE);
+
+                return false;
+            }
+        }
+
+        for(Progetto prog : getProgetti()){
+
+            if(prog.getReferenteScientifico() == impiegato){
+
+                JOptionPane.showMessageDialog(null,"L'impiegato da eliminare è referente di un progetto", "Erore", JOptionPane.ERROR_MESSAGE);
+
+                return false;
+
+            }
+        }
+
+        for (Progetto prog : getProgetti()){
+
+            if(prog.getResponsabile() == impiegato.getDirigente()){
+
+                JOptionPane.showMessageDialog(null,"L'impiegato da eliminare è responsabile di un progetto", "Erore", JOptionPane.ERROR_MESSAGE);
+
+                return false;
+            }
+        }
 
         boolean flag = false;
 

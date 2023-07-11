@@ -43,6 +43,8 @@ public class AggiungiProgetto {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(chiamante);
+        frame.setSize(600,400);
+        frame.setResizable(false);
         frame.setVisible(true);
 
         //Selezione data inizio

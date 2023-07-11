@@ -35,7 +35,7 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         PreparedStatement updateCategoriePS;
         try {
             updateCategoriePS = connection.prepareStatement(
-                    "CALL updateCategoria()"
+                    "CALL updatecategoria()"
             );
             updateCategoriePS.executeUpdate();
             connection.close();
