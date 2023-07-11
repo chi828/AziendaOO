@@ -5,49 +5,49 @@ package DAO;
  */
 public interface ProgettoInCorsoDAO {
     /**
-     * Concludi progetto.
+     * Conclude un progetto in corso
      *
-     * @param cup                  the cup
-     * @param nome                 the nome
-     * @param dataInizio           the data inizio
-     * @param dataFine             the data fine
-     * @param referenteScientifico the referente scientifico
-     * @param responsabile         the responsabile
+     * @param cup                  cup del progetto da concludere
+     * @param nome                 nome del progetto da concludere
+     * @param dataInizio           data inizio del progetto da concludere
+     * @param dataFine             data fine del progetto da concludere
+     * @param referenteScientifico referente scientifico del progetto da concludere
+     * @param responsabile         responsabile del progetto da concludere
      */
     public void concludiProgetto(String cup, String nome, String dataInizio, String dataFine,
                                  String referenteScientifico, String responsabile);
 
     /**
-     * Add assegnazione.
+     * Aggiunge in database un laboratorio assegnato ad un progetto.
      *
-     * @param cup              the cup
-     * @param nomeLaboratorio  the nome laboratorio
-     * @param topicLaboratorio the topic laboratorio
+     * @param cup              cup del progetto a cui assegnare un nuovo laboratorio.
+     * @param nomeLaboratorio  nome del laboratorio che verrà assegnato al progetto.
+     * @param topicLaboratorio topic del laboratorio che verrà assegnato al progetto.
      */
     public void addAssegnazione(String cup, String nomeLaboratorio, String topicLaboratorio);
 
     /**
-     * Remove assegnazione.
+     * Rimuove in database un progetto assegnato ad un laboratorio.
      *
-     * @param cup              the cup
-     * @param nomeLaboratorio  the nome laboratorio
-     * @param topicLaboratorio the topic laboratorio
+     * @param cup              cup del progetto a cui rimuovere l'assegnazione.
+     * @param nomeLaboratorio  nome del laboratorio di cui rimuovere l'assegnazione.
+     * @param topicLaboratorio topic del laboratorio di cui rimuovere l'assegnazione.
      */
     public void removeAssegnazione(String cup, String nomeLaboratorio, String topicLaboratorio);
 
     /**
-     * Sets referente scientifico.
+     * Riassegna in database un referente scientifico di un progetto.
      *
-     * @param cup the cup
-     * @param cf  the cf
+     * @param cup cup del progetto.
+     * @param cf  cf del nuovo referente scientifico.
      */
     public void setReferenteScientifico(String cup, String cf);
 
     /**
-     * Sets responsabile.
+     * Riassegna in database un responsabile di un progetto.
      *
-     * @param cup the cup
-     * @param cf  the cf
+     * @param cup cup del progetto
+     * @param cf  cf del nuovo responsabile
      */
     void setResponsabile(String cup, String cf);
 

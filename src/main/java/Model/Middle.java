@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Middle.
+ * Rappresenta gli impiegati appartenenti alla categoria middle.
  */
 public class Middle extends Impiegato{
 
     private Date passaggioMiddle;
 
     /**
-     * Instantiates a new Middle.
+     * Costruttore per impiegato middle non dirigente.
      *
      * @param nome             the nome
      * @param cognome          the cognome
@@ -33,7 +33,7 @@ public class Middle extends Impiegato{
     }
 
     /**
-     * Instantiates a new Middle.
+     * Costruttore per impiegato middle non dirigente.
      *
      * @param nome               the nome
      * @param cognome            the cognome

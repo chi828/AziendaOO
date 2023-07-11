@@ -1,11 +1,5 @@
 package DAO;
 
-import Model.Impiegato;
-import Model.Laboratorio;
-import Model.Progetto;
-import Model.ProgettoInCorso;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,93 +9,108 @@ import java.util.Date;
 public interface AziendaDAO {
 
     /**
-     * Update categorie.
+     * Chiama la procedura che si occupa di aggiornare le categorie degli impiegati nel database.
      */
     public void updateCategorie();
 
     /**
-     * Read all junior non dirigenti.
+     * Carica dal database i dati relativi a tutti gli impiegati junior non dirigenti.
      *
-     * @param impiegatiString the impiegati string
-     * @param impiegatiDate   the impiegati date
-     * @param afferenze       the afferenze
-     * @param stipendi        the stipendi
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita e data
+     *                        assunzione dell'impiegato
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
      */
     public void readAllJuniorNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
                                           ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
-     * Read all junior dirigenti.
+     * Carica dal database i dati relativi a tutti gli impiegati junior dirigenti.
      *
-     * @param impiegatiString the impiegati string
-     * @param impiegatiDate   the impiegati date
-     * @param afferenze       the afferenze
-     * @param stipendi        the stipendi
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione e passaggio dirigente dell'impiegato
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
      */
     public void readAllJuniorDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
                                        ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
-     * Read all middle non dirigenti.
+     * Carica dal database i dati relativi a tutti gli impiegati middle non dirigenti.
      *
-     * @param impiegatiString the impiegati string
-     * @param impiegatiDate   the impiegati date
-     * @param afferenze       the afferenze
-     * @param stipendi        the stipendi
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione e passaggio middle dell'impiegato
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
      */
     public void readAllMiddleNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
                                           ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
-     * Read all middle dirigenti.
+     * Carica dal database i dati relativi a tutti gli impiegati middle dirigenti.
      *
-     * @param impiegatiString the impiegati string
-     * @param impiegatiDate   the impiegati date
-     * @param afferenze       the afferenze
-     * @param stipendi        the stipendi
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione, passaggio middle dell'impiegato e passaggio dirigente
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
      */
     public void readAllMiddleDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
-     * Read all senior non dirigenti.
+     * Carica dal database i dati relativi a tutti gli impiegati senior non dirigenti.
      *
-     * @param impiegatiString the impiegati string
-     * @param impiegatiDate   the impiegati date
-     * @param afferenze       the afferenze
-     * @param stipendi        the stipendi
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione, passaggio middle dell'impiegato e passaggio senior
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
      */
     public void readAllSeniorNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
-     * Read all senior dirigenti.
+     * Carica dal database i dati relativi a tutti gli impiegati senior dirigenti.
      *
-     * @param impiegatiString the impiegati string
-     * @param impiegatiDate   the impiegati date
-     * @param afferenze       the afferenze
-     * @param stipendi        the stipendi
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione, passaggio middle dell'impiegato, passaggio senior e passaggio dirigente
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
      */
     public void readAllSeniorDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi);
 
     /**
-     * Read all laboratori.
+     * Carica dal database i dati relativi ai laboratori.
      *
-     * @param laboratori the laboratori
+     * @param laboratori ciascun array di stringe contiene in ordine nome, topic e codice fiscale del responsabile
+     *                   scientifico del laboratorio.
      */
     public void readAllLaboratori(ArrayList<String[]> laboratori);
 
     /**
-     * Read all progetti in corso.
+     * Carica dal database i dati relativi ai progetti in corso.
      *
-     * @param progettiString the progetti string
-     * @param progettiDate   the progetti date
+     * @param progettiString Ciascun array di stringhe contiene in ordine nome, cup, referente scientifico,
+     *                       responsabile del progetto
+     * @param progettiDate   la date di inizio dei progetti
      */
     public void readAllProgettiInCorso(ArrayList<String[]> progettiString, ArrayList<Date> progettiDate);
 
     /**
-     * Read all progetti conclusi.
+     * Carica dal database i dati relativi ai progetti conclusi.
      *
-     * @param progettiString the progetti string
-     * @param progettiDate   the progetti date
+     * @param progettiString Ciascun array di stringhe contiene in ordine nome, cup, referente scientifico,
+     *                       responsabile del progetto
+     * @param progettiDate   la date di inizio e di fine dei progetti in questo ordine.
      */
     public void readAllProgettiConclusi(ArrayList<String[]> progettiString, ArrayList<Date[]> progettiDate);
 

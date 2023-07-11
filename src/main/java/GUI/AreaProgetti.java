@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Area progetti.
+ * Interfaccia grafica per la visualizzazione e la modifica dei progetti in corso.
  */
 public class AreaProgetti {
     /**

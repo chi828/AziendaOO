@@ -134,35 +134,4 @@ public class ImpiegatoImplementazionePostgresDAO implements ImpiegatoDAO {
         return flag;
     }
 
-    public String getInfoCategoria(java.util.Date dataAssunzione) {
-
-        String query = "{ ? = CALL infocategoria(?) }";
-
-        java.util.Date utilDate = dataAssunzione;
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-        try{
-
-            CallableStatement statement = connection.prepareCall(query);
-
-            statement.registerOutParameter(1, Types.VARCHAR);
-            statement.setDate(2, sqlDate);
-
-            statement.execute();
-
-            String returnValue = statement.getString(1);
-
-            connection.close();
-
-            return returnValue;
-
-
-        }catch(SQLException e){
-
-            e.printStackTrace();
-
-            return null;
-        }
-
-    }
 }

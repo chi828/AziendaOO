@@ -30,6 +30,9 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Chiama la procedura che si occupa di aggiornare le categorie degli impiegati nel database di Postgres.
+     */
     @Override
     public void updateCategorie() {
         PreparedStatement updateCategoriePS;
@@ -44,6 +47,16 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Carica dal database di Postgres i dati relativi a tutti gli impiegati junior non dirigenti.
+     *
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita e data
+     *                        assunzione dell'impiegato
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
+     */
     @Override
     public void readAllJuniorNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate,
                                           ArrayList<String[]> afferenze, ArrayList<Float> stipendi) {
@@ -81,7 +94,16 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Carica dal database di postgres i dati relativi a tutti gli impiegati junior dirigenti.
+     *
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione e passaggio dirigente dell'impiegato
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
+     */
     @Override
     public void readAllJuniorDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi) {
 
@@ -121,6 +143,16 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
 
     }
 
+    /**
+     * Carica dal database di Postgres i dati relativi a tutti gli impiegati middle non dirigenti.
+     *
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione e passaggio middle dell'impiegato
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
+     */
     @Override
    public void readAllMiddleNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi) {
         PreparedStatement leggiMiddleNonDirigentiPS;
@@ -158,6 +190,16 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Carica dal database di Postgres i dati relativi a tutti gli impiegati middle dirigenti.
+     *
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione, passaggio middle dell'impiegato e passaggio dirigente
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
+     */
     @Override
     public void readAllMiddleDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi) {
         PreparedStatement leggiMiddleDirigentiPS;
@@ -197,6 +239,17 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
 
     }
 
+    /**
+     * Carica dal database i dati relativi a tutti gli impiegati senior non dirigenti.
+     *
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione, passaggio middle dell'impiegato e passaggio senior
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
+     */
+
     @Override
    public void readAllSeniorNonDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi) {
         PreparedStatement leggiSeniorNonDirigentiPS;
@@ -235,6 +288,17 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+
+    /**
+     * Carica dal database i dati relativi a tutti gli impiegati senior dirigenti.
+     *
+     * @param impiegatiString A fine metodo ciascun array di stringe conterrà nome, conome, sesso, luogo di nascita,
+     *                       CF dell'impiegato
+     * @param impiegatiDate   A fine metodo ciascun array di date conterrà in ordine data di nascita, data
+     *                        assunzione, passaggio middle dell'impiegato, passaggio senior e passaggio dirigente
+     * @param afferenze       Ciascun array di stringhe in ordine contiene nome e topic dell'impiegato
+     * @param stipendi        Ciascun float rappresenta lo stipendio dell'impiegato
+     */
     @Override
     public void readAllSeniorDirigenti(ArrayList<String[]> impiegatiString, ArrayList<Date[]> impiegatiDate, ArrayList<String[]> afferenze, ArrayList<Float> stipendi) {
         PreparedStatement leggiSeniorDirigentiPS;
@@ -275,6 +339,12 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
 
     }
 
+    /**
+     * Carica dal database i dati relativi ai laboratori.
+     *
+     * @param laboratori ciascun array di stringe contiene in ordine nome, topic e codice fiscale del responsabile
+     *                   scientifico del laboratorio.
+     */
     @Override
     public void readAllLaboratori(ArrayList<String[]> laboratori) {
         PreparedStatement leggiLaboratoriPS;
@@ -297,6 +367,13 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Carica dal database i dati relativi ai progetti in corso.
+     *
+     * @param progettiString Ciascun array di stringhe contiene in ordine nome, cup, referente scientifico,
+     *                       responsabile del progetto
+     * @param progettiDate   la date di inizio dei progetti
+     */
     @Override
     public void readAllProgettiInCorso(ArrayList<String[]> progettiString, ArrayList<Date> progettiDate) {
         PreparedStatement leggiProgettiPS;
@@ -326,6 +403,14 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+
+    /**
+     * Carica dal database i dati relativi ai progetti conclusi.
+     *
+     * @param progettiString Ciascun array di stringhe contiene in ordine nome, cup, referente scientifico,
+     *                       responsabile del progetto
+     * @param progettiDate   la date di inizio e di fine dei progetti in questo ordine.
+     */
     @Override
     public void readAllProgettiConclusi(ArrayList<String[]> progettiString, ArrayList<Date[]> progettiDate) {
         PreparedStatement leggiProgettiPS;
@@ -356,6 +441,16 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Add progetto in corso.
+     *
+     * @param cup                  the cup
+     * @param nome                 the nome
+     * @param dataInizio           the data inizio
+     * @param assegnazioni         the assegnazioni
+     * @param referenteScientifico the referente scientifico
+     * @param responsabile         the responsabile
+     */
     @Override
     public void addProgettoInCorso(String cup, String nome, String dataInizio, ArrayList<String[]> assegnazioni,
                                    String referenteScientifico, String responsabile) {

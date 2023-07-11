@@ -6,11 +6,15 @@ import Model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * The type Controller.
@@ -20,7 +24,7 @@ public class Controller {
     private Azienda azienda;
 
     /**
-     * Instantiates a new Controller.
+     * Istanzia il controller e chiama la funzione per caricare i dati dal database.
      */
     public Controller() {
         azienda = new Azienda();
@@ -28,7 +32,8 @@ public class Controller {
     }
 
     /**
-     * Carica i dati in memoria reperendoli dal database.
+     * Coordina il caricamento dei dati in memoria reperendoli dal database tramite il DAO e funzioni che lo
+     * interrogano.
      */
     private void loadModel() {
 
@@ -400,10 +405,22 @@ public class Controller {
         return result;
     }
 
+    /***
+     * Recupera una array list di impiegati da azienda.
+     * @return array list contenenti tutti gli impiegati in azienda.
+     */
     private ArrayList<Impiegato> getImpiegati() {return azienda.getImpiegati();}
 
+    /***
+     * Recupera una array list di laboratori da azienda.
+     * @return array list contenente tutti i laboratori in azienda.
+     */
     private ArrayList<Laboratorio> getLaboratori(){return azienda.getLaboratori();}
 
+    /***
+     * Recupera una array list di laboratori da azienda.
+     * @return array list contenente tutti i progetti in azienda.
+     */
     private ArrayList<Progetto> getProgetti(){return azienda.getProgetti();}
 
     //___________________________________________OPERAZIONI SUI DATI__________________________________________
@@ -414,9 +431,12 @@ public class Controller {
      * Metodo per passare i dati dei laboratori alle gui in forma di array list di stringhe. Popola gli array list
      * passati per parametro con tali dati.
      *
-     * @param nomiLaboratori          the nomi laboratori
-     * @param topicLaboratori         the topic laboratori
-     * @param responsabiliScientifici the responsabili scientifici
+     * @param nomiLaboratori          array list che al termine dell'esecuzione del metodo conterrà i nomi dei
+     *                               laboratori
+     * @param topicLaboratori         array list che al termine dell'esecuzione del metodo conterrà i topic dei
+     *                               laboratori
+     * @param responsabiliScientifici array list che al termine dell'esecuzione del metodo conterrà i responsabili
+     *                                scientifici dei laboratori
      */
     public void getLaboratori(ArrayList<String> nomiLaboratori, ArrayList<String> topicLaboratori,
                               ArrayList<String> responsabiliScientifici) {
@@ -436,10 +456,13 @@ public class Controller {
      * Metodo per passare alle gui i dati dei laboratori assegnati ad un progetto in corso sotto forma di stringhe.
      * Popola gli array list passati per secondo, terzo e quarto parametro con tali dati.
      *
-     * @param indiceProgetto          the indice progetto
-     * @param nomiLaboratori          the nomi laboratori
-     * @param topicLaboratori         the topic laboratori
-     * @param responsabiliScientifici the responsabili scientifici
+     * @param indiceProgetto          Indice del progetto in corso di cui ci interessano i laboratori assegnati
+     * @param nomiLaboratori          array list che al termine dell'esecuzione del metodo conterrà i nomi dei
+     *                               laboratori assegnati al progetto
+     * @param topicLaboratori         array list che al termine dell'esecuzione del metodo conterrà i topic dei
+     *                               laboratori assegnati al progetto
+     * @param responsabiliScientifici array list che al termine dell'esecuzione del metodo conterrà i responsabili
+     *                                scientifici dei laboratori assegnati al progetto
      */
     public void getLaboratoriAssegnati(int indiceProgetto, ArrayList<String> nomiLaboratori, ArrayList<String> topicLaboratori,
                                        ArrayList<String> responsabiliScientifici) {
@@ -456,13 +479,16 @@ public class Controller {
     }
 
     /**
-     * Metodo per passare alle gui i dati dei laboratori assegnati ad un progetto in corso sotto forma di stringhe.
+     * Metodo per passare alle gui i dati dei laboratori assegnati ad un progetto concluso sotto forma di stringhe.
      * Popola gli array list passati per secondo, terzo e quarto parametro con tali dati.
      *
-     * @param indiceProgetto          the indice progetto
-     * @param nomiLaboratori          the nomi laboratori
-     * @param topicLaboratori         the topic laboratori
-     * @param responsabiliScientifici the responsabili scientifici
+     * @param indiceProgetto          Indice del progetto concluso di cui ci interessano i laboratori assegnati
+     * @param nomiLaboratori          array list che al termine dell'esecuzione del metodo conterrà i nomi dei
+     *                                laboratori assegnati al progetto
+     * @param topicLaboratori         array list che al termine dell'esecuzione del metodo conterrà i topic dei
+     *                               laboratori assegnati al progetto
+     * @param responsabiliScientifici array list che al termine dell'esecuzione del metodo conterrà i responsabili
+     *                               scientifici dei laboratori assegnati al progetto
      */
     public void getLaboratoriAssegnatiConclusi(int indiceProgetto, ArrayList<String> nomiLaboratori,
                                                ArrayList<String> topicLaboratori, ArrayList<String> responsabiliScientifici) {
@@ -482,11 +508,11 @@ public class Controller {
      * Gets progetti in corso. Metodo per fornire alla gui i dati dei progetti in corso sotto forma di array list
      * si stringhe e date. Popola gli array list passati per parametro con tali dati.
      *
-     * @param nomiProgetti the nomi progetti
-     * @param cupProgetti  the cup progetti
-     * @param dateInizio   the date inizio
-     * @param responsabili the responsabili
-     * @param referenti    the referenti
+     * @param nomiProgetti array list che al termine dell'esecuzione del metodo conterrà i nomi dei progetti
+     * @param cupProgetti  array list che al termine dell'esecuzione del metodo conterrà i cup dei progetti
+     * @param dateInizio   array list che al termine dell'esecuzione del metodo conterrà le date di inizio
+     * @param responsabili array list che al termine dell'esecuzione del metodo conterrà i responsabili
+     * @param referenti    array list che al termine dell'esecuzione del metodo conterrà i referenti
      */
     public void getProgettiInCorso(ArrayList<String> nomiProgetti, ArrayList<String> cupProgetti,
                                         ArrayList<Date> dateInizio, ArrayList<String> responsabili, ArrayList<String> referenti) {
@@ -507,14 +533,14 @@ public class Controller {
 
     /**
      * Gets progetti conclusi. Metodo per fornire alla gui i dati dei progetti conclusi sotto forma di array list
-     *      * si stringhe e date. Popola gli array list passati per parametro con tali dati.
+     * * si stringhe e date. Popola gli array list passati per parametro con tali dati.
      *
-     * @param nomiProgetti the nomi progetti
-     * @param cupProgetti  the cup progetti
-     * @param dateInizio   the date inizio
-     * @param dateFine     the date fine
-     * @param responsabili the responsabili
-     * @param referenti    the referenti
+     * @param nomiProgetti array list che al termine dell'esecuzione del metodo conterrà i nomi dei progetti
+     * @param cupProgetti  array list che al termine dell'esecuzione del metodo conterrà i cup dei progetti
+     * @param dateInizio   array list che al termine dell'esecuzione del metodo conterrà le date di inizio
+     * @param dateFine     array list che al termine dell'esecuzione del metodo conterrà le date di fine
+     * @param responsabili array list che al termine dell'esecuzione del metodo conterrà i responsabili
+     * @param referenti    array list che al termine dell'esecuzione del metodo conterrà i referenti
      */
     public void getProgettiConclusi(ArrayList<String> nomiProgetti, ArrayList<String> cupProgetti,
                                    ArrayList<Date> dateInizio, ArrayList<Date> dateFine,
@@ -536,7 +562,7 @@ public class Controller {
     }
 
     /**
-     * Gets progetti in corso.
+     * Crea un array list prendendo, dai progetti in azienda, solo quelli in corso.
      *
      * @return the progetti in corso
      */
@@ -551,7 +577,7 @@ public class Controller {
     }
 
     /**
-     * Gets progetti conclusi.
+     * Crea un array list prendendo, dai progetti in azienda, solo quelli conclusi.
      *
      * @return the progetti conclusi
      */
@@ -570,7 +596,7 @@ public class Controller {
      * Metodo per passare alle gui una array list di String con dati degli impiegati con ruolo di dirigente.
      * ciascuna string contiene nome cognome e codice fiscale dell'impiegato in questo ordine.
      *
-     * @return the impiegati dirigenti
+     * @return array list di stringhe composte da nome, cognome e codice fiscale di ciascun impiegato dirigente
      */
     public ArrayList<String> getImpiegatiDirigenti() {
         ArrayList<String> result = new ArrayList<>();
@@ -585,7 +611,7 @@ public class Controller {
      * Metodo per passare alla gui una array list di String con dati degli impiegati senior.
      * ciascuna string contiene nome cognome e codice fiscale dell'impiegato in questo ordine.
      *
-     * @return the seniors
+     * @return array list di stringhe composte da nome, cognome e codice fiscale di ciascun impiegato senior.
      */
     public ArrayList<String> getSeniors() {
         ArrayList<String> result = new ArrayList<>();
@@ -597,9 +623,10 @@ public class Controller {
     }
 
     /**
-     * Set all impiegati.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati dell'azienda.
      *
-     * @param modelTable the model table
+     * @param modelTable model della tabella principale degli impiegati
      */
     public void setAllImpiegati(DefaultTableModel modelTable){
 
@@ -629,10 +656,11 @@ public class Controller {
     }
 
     /**
-     * Set per categoria.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati che appartegono alla categoria passata come parametro.
      *
-     * @param modelTable the model table
-     * @param categoria  the categoria
+     * @param modelTable model della tabella degli impiegati
+     * @param categoria  the categoria può esssumere valori da 1 a 4 che corrispondono rispettivamente a Junior,Middle,Senior,Dirigente
      */
     public void setPerCategoria(DefaultTableModel modelTable, int categoria){
 
@@ -758,10 +786,11 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per cf.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verrà visualizzato l'impiegato che corrisponde al codice fiscale passato come parametro.
      *
-     * @param modelTable the model table
-     * @param cf         the cf
+     * @param modelTable model della tabella degli impiegati.
+     * @param cf         codice fiscale dell'impiegato da visualizzare
      */
     public void setImpiegatiPerCF(DefaultTableModel modelTable, String cf){
 
@@ -794,10 +823,11 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per sesso.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati che appartegono al sesso passata come parametro.
      *
-     * @param modelTable the model table
-     * @param sesso      the sesso
+     * @param modelTable modello tabella degli impiegati
+     * @param sesso      the sesso degli impiegati da visualizzare
      */
     public void setImpiegatiPerSesso(DefaultTableModel modelTable, char sesso){
 
@@ -851,10 +881,11 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per nome.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati che hanno il nome corrispondente parametro passato.
      *
-     * @param modelTable the model table
-     * @param nome       the nome
+     * @param modelTable modello tabella degli impiegati
+     * @param nome       nome corrispondente agli impiegati da visualizzare
      */
     public void setImpiegatiPerNome(DefaultTableModel modelTable, String nome){
 
@@ -887,10 +918,11 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per cognome.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati che hanno il cognome corrispondente parametro passato.
      *
-     * @param modelTable the model table
-     * @param cognome    the cognome
+     * @param modelTable modello tabella degli impiegati
+     * @param cognome    cognome corrispondente agli impiegati da visualizzare
      */
     public void setImpiegatiPerCognome(DefaultTableModel modelTable, String cognome){
 
@@ -923,11 +955,12 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per data.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati la cui data di assunzione corrisponde all'itervallo passato come parametro.
      *
-     * @param modelTable the model table
-     * @param data       the data
-     * @param inervallo  the inervallo
+     * @param modelTable modello tabella degli impiegati
+     * @param data       data di assunzione di riferimento per l'intervallo
+     * @param inervallo  può assumere valori "<=", "<", "=", ">=" ">" relativamente alla data passato come secondo parametro
      */
     public void setImpiegatiPerData(DefaultTableModel modelTable, Date data, String inervallo){
 
@@ -1083,10 +1116,11 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per laboratorio.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati tutti gli impiegati che lavorano per il laboratorio corrispondente al parametro passato.
      *
-     * @param modelTable  the model table
-     * @param laboratorio the laboratorio
+     * @param modelTable  modello tabella degli impiegati
+     * @param laboratorio è un array di String con due valori: nome laboratorio, topic laboratorio
      */
     public void setImpiegatiPerLaboratorio(DefaultTableModel modelTable, String[] laboratorio){
 
@@ -1113,10 +1147,11 @@ public class Controller {
     }
 
     /**
-     * Set impiegati per progetto assegnato.
+     * Metodo che aggiorna la tabella degli impiegati in area impiegato.Metodo che aggiorna la tabella degli impiegati in area impiegato.
+     * Nella tabella verranno visualizzati gli impiegati a cui è stato assegnato il progetto passato come parametro
      *
-     * @param modelTable the model table
-     * @param cup        the cup
+     * @param modelTable modello tabella degli impiegati
+     * @param cup        progetto
      */
     public void setImpiegatiPerProgettoAssegnato(DefaultTableModel modelTable, String cup){
 
@@ -1158,17 +1193,20 @@ public class Controller {
         }
     }
 
+
     /**
-     * Set modelli info impiegato.
+     * In questo metodo vengono passati come parametro tutti i modelli delle tabelle secondarie dell'aerea impiegato.
+     * Nell'ultimo parametro invece viene passato il codice fiscale dell'impiegato per cui verranno settate le tabelle.
+     * Per cui nelle tabelle verranno visualizzate le informazioni relative al codice fiscale.
      *
-     * @param carriera             the carriera
-     * @param labResp              the lab resp
-     * @param progRef              the prog ref
-     * @param progResp             the prog resp
-     * @param progInCorsoAssegnati the prog in corso assegnati
-     * @param progInCorsoContr     the prog in corso contr
-     * @param progConclusiContr    the prog conclusi contr
-     * @param cfImp                the cf imp
+     * @param carriera             modello tabella che contiene la carriera dell'impiegato
+     * @param labResp              modello tabella che contiene i laboratori per cui l'impiegato è responsabile
+     * @param progRef              modello tabella che contiene i progetti per cui l'impiegato è referente
+     * @param progResp             modello tabella che contiene i progetti per cui l'impiegato è responsabile
+     * @param progInCorsoAssegnati modello tabella che contiene i progetti in corso a cui sono stati assegnati all'impiegato
+     * @param progInCorsoContr     modello tabella che contiene i progetti in corso a cui l'impiegato ha contribuito
+     * @param progConclusiContr    modello tabella che contiene i progetti conclusi a cui l'impiegato ha contribuito
+     * @param cfImp                stringa contentete il codice fiscale
      */
     public void setModelliInfoImpiegato(DefaultTableModel carriera, DefaultTableModel labResp, DefaultTableModel progRef,
                                         DefaultTableModel progResp, DefaultTableModel progInCorsoAssegnati,
@@ -1335,12 +1373,14 @@ public class Controller {
     }
 
     /**
-     * Add laboratorio.
+     * Purché non esistano laboratori con la stessa coppia di topic e nome in azieda, aggiunge il laboratorio,
+     * altrimenti propaga l'eccezione che parte da addLaboratorio(...) in {@link Azienda}.
      *
-     * @param nome                          the nome
-     * @param topic                         the topic
-     * @param indiceResponsabileScientifico the indice responsabile scientifico
-     * @throws RuntimeException the runtime exception
+     * @param nome                          Nome del laboratorio da inserire
+     * @param topic                         Topic del laboratorio da inserire
+     * @param indiceResponsabileScientifico Indice del senior a cui viene assegnato il ruolo di responsabile                                      scientifico per il nuovo laboratorio.
+     * @throws RuntimeException Eccezione propagata da addLaboratorio.
+     * @see Azienda
      */
     public void addLaboratorio(String nome, String topic, int indiceResponsabileScientifico) throws RuntimeException{
 
@@ -1354,12 +1394,12 @@ public class Controller {
     }
 
     /**
-     * Insert lavorare boolean.
+     * metodo che assegna all'impiegato passato come parametro un lavoro
      *
-     * @param cf  the cf
-     * @param cup the cup
-     * @param ore the ore
-     * @return the boolean
+     * @param cf  stringa codice fiscale impiegato
+     * @param cup stringa cup progetto
+     * @param ore valore intero che rappresenta le ore settimane dedicate al progetto
+     * @return the boolean, ritorna true se l'inserimento ha avuto successo false altrimenti.
      */
     public boolean insertLavorare(String cf, String cup, int ore){
 
@@ -1451,18 +1491,18 @@ public class Controller {
     }
 
     /**
-     * Inserisci impiegato boolean.
+     * metodo che inserisce un impiegato nel sistema
      *
-     * @param nome             the nome
-     * @param cognome          the cognome
-     * @param sesso            the sesso
-     * @param dataDiNascita    the data di nascita
-     * @param luogoDiNascita   the luogo di nascita
-     * @param cf               the cf
-     * @param dataDiAssunzione the data di assunzione
-     * @param stipendio        the stipendio
-     * @param dirigente        the dirigente
-     * @return the boolean
+     * @param nome             stringa nome impiegato
+     * @param cognome          stringa cognome impiegato
+     * @param sesso            carattere sesso con possibili valori 'm' o 'f'
+     * @param dataDiNascita    date relativo alla data di nascita
+     * @param luogoDiNascita   stringa del luogo di nascita
+     * @param cf               stringa codice fiscale
+     * @param dataDiAssunzione date relativa alla data di assunzione
+     * @param stipendio        String di caratteri numerici relativi allo stipendio
+     * @param dirigente        boolean: false se non entra come dirigente, true altrimenti.
+     * @return the boolean: true se l'inserimento ha avuto successo, false altrimenti.
      */
     public boolean inserisciImpiegato(String nome, String cognome, char sesso, Date dataDiNascita,
                                       String luogoDiNascita, String cf, Date dataDiAssunzione,
@@ -1478,97 +1518,44 @@ public class Controller {
                 dataDiAssunzione,stipendio,dirigente);
 
         //Salvataggio in memoria
-        String categoria;
+        if(checkInserimento) {
 
-        ImpiegatoImplementazionePostgresDAO leggiCategoriaPS = new ImpiegatoImplementazionePostgresDAO();
+            Date date = new Date();
+            Calendar currentDate = Calendar.getInstance();
+            currentDate.setTime(date);
+            Calendar passaggioMiddle = Calendar.getInstance();
+            passaggioMiddle.setTime(dataDiAssunzione);
+            passaggioMiddle.add(Calendar.YEAR, 3);
+            Calendar passaggioSenior = Calendar.getInstance();
+            passaggioSenior.setTime(dataDiAssunzione);
+            passaggioSenior.add(Calendar.YEAR, 7);
 
-        categoria = leggiCategoriaPS.getInfoCategoria(dataDiAssunzione);
-
-        if(checkInserimento){
-
-            if(!dirigente){
-
-                if(categoria.equals("Junior")){
-
-                    Junior nuovoImpiegato = new Junior(nome,cognome,sesso,dataDiNascita,luogoDiNascita,cf,
-                            dataDiAssunzione,Float.parseFloat(stipendio),null,null);
-
-                    azienda.getImpiegati().add(nuovoImpiegato);
+            if(currentDate.after(passaggioSenior)) {
+                if(dirigente) {
+                    azienda.addImpiegato(new Senior(nome, cognome, sesso, dataDiNascita, luogoDiNascita, cf,
+                            dataDiAssunzione, Float.parseFloat(stipendio), null, date, passaggioMiddle.getTime(),
+                            passaggioSenior.getTime()));
+                } else {
+                    azienda.addImpiegato(new Senior(nome, cognome, sesso, dataDiNascita, luogoDiNascita, cf,
+                            dataDiAssunzione, Float.parseFloat(stipendio), null, passaggioMiddle.getTime(),
+                            passaggioSenior.getTime()));
                 }
-
-                if(categoria.equals("Middle")){
-
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(dataDiAssunzione);
-                    calendar.add(Calendar.YEAR, 3);
-                    Date dataPromozioneMiddle = calendar.getTime();
-
-                    Middle nuovoImpiegato = new Middle(nome,cognome,sesso,dataDiNascita,luogoDiNascita,cf,
-                            dataDiAssunzione,Float.parseFloat(stipendio),null,null, dataPromozioneMiddle);
-
-                    azienda.getImpiegati().add(nuovoImpiegato);
+            } else if(currentDate.after(passaggioMiddle)) {
+                if(dirigente) {
+                    azienda.addImpiegato(new Middle(nome, cognome, sesso, dataDiNascita, luogoDiNascita, cf,
+                            dataDiAssunzione, Float.parseFloat(stipendio), null, date, passaggioMiddle.getTime()));
+                } else {
+                    azienda.addImpiegato(new Middle(nome, cognome, sesso, dataDiNascita, luogoDiNascita, cf,
+                            dataDiAssunzione, Float.parseFloat(stipendio), null, passaggioMiddle.getTime()));
                 }
-
-                if(categoria.equals("Senior")){
-
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(dataDiAssunzione);
-                    calendar.add(Calendar.YEAR, 3);
-                    Date dataPromozioneMiddle = calendar.getTime();
-
-                    Calendar calendar2 = Calendar.getInstance();
-                    calendar2.setTime(dataDiAssunzione);
-                    calendar2.add(Calendar.YEAR, 7);
-                    Date dataPromozioneSenior = calendar2.getTime();
-
-                    azienda.getImpiegati().add(new Senior(nome,cognome,sesso,dataDiNascita,luogoDiNascita,cf,dataDiAssunzione,
-                            Float.parseFloat(stipendio),null,null,
-                            dataPromozioneMiddle,dataPromozioneSenior));
-
+            } else {
+                if(dirigente) {
+                    azienda.addImpiegato(new Junior(nome, cognome, sesso, dataDiNascita, luogoDiNascita, cf,
+                            dataDiAssunzione, Float.parseFloat(stipendio), null, date));
+                } else {
+                    azienda.addImpiegato(new Junior(nome, cognome, sesso, dataDiNascita, luogoDiNascita, cf,
+                            dataDiAssunzione, Float.parseFloat(stipendio), null));
                 }
-
-            }
-        }
-
-        if(checkInserimento && dirigente){
-
-            if(categoria.equals("Junior")){
-
-                Junior nuovoImpiegato = new Junior(nome,cognome,sesso,dataDiNascita,luogoDiNascita,cf,
-                        dataDiAssunzione,Float.parseFloat(stipendio),null,dataDiAssunzione);
-
-                azienda.getImpiegati().add(nuovoImpiegato);
-            }
-
-            if(categoria.equals("Middle")){
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dataDiAssunzione);
-                calendar.add(Calendar.YEAR, 3);
-                Date dataPromozioneMiddle = calendar.getTime();
-
-                Middle nuovoImpiegato = new Middle(nome,cognome,sesso,dataDiNascita,luogoDiNascita,cf,
-                        dataDiAssunzione,Float.parseFloat(stipendio),null,dataDiAssunzione, dataPromozioneMiddle);
-
-                azienda.getImpiegati().add(nuovoImpiegato);
-            }
-
-            if(categoria.equals("Senior")){
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dataDiAssunzione);
-                calendar.add(Calendar.YEAR, 3);
-                Date dataPromozioneMiddle = calendar.getTime();
-
-                Calendar calendar2 = Calendar.getInstance();
-                calendar2.setTime(dataDiAssunzione);
-                calendar2.add(Calendar.YEAR, 7);
-                Date dataPromozioneSenior = calendar2.getTime();
-
-                azienda.getImpiegati().add(new Senior(nome,cognome,sesso,dataDiNascita,luogoDiNascita,cf,dataDiAssunzione,
-                        Float.parseFloat(stipendio),null,dataDiAssunzione,
-                        dataPromozioneMiddle,dataPromozioneSenior));
-
             }
         }
 
@@ -1576,10 +1563,10 @@ public class Controller {
     }
 
     /**
-     * Concludi progetto.
+     * Conclude un progetto in corso eliminandolo e reinserendolo come progetto concluso.
      *
-     * @param indiceProgetto the progetto
-     * @param dataFine the data fine
+     * @param indiceProgetto indice del progetto in corso da concludere.
+     * @param dataFine       data di conclusione del progetto.
      */
 //Modifiche
     public void concludiProgetto(int indiceProgetto, Date dataFine) {
@@ -1598,12 +1585,13 @@ public class Controller {
     }
 
     /**
-     * Add assegnazione laboratorio progetto.
+     * Se il progetto non ha già tre laboratorio assengati, assegna al progetto il laboratorio in input.
+     * Altrimenti propaga l'eccezione proveniente da ProgettoInCorso.addAssegnazioneLaboratorio(...).
      *
-     * @param indiceProgettoInCorso the indice progetto in corso
-     * @param nomeLab               the nome lab
-     * @param topicLab              the topic lab
-     * @throws RuntimeException the runtime exception
+     * @param indiceProgettoInCorso l'indice del progetto in corso a cui aggiungere l'assegnazione
+     * @param nomeLab               Nome del laboratorio da assegnare al progetto.
+     * @param topicLab              Topic del laboratorio da assegnare al progetto.
+     * @throws RuntimeException eccezione propagata da addAssegnazioneLaboratori(...) in progetto in corso nel caso in cui il progetto abbia già tre laboratori assegnati.
      */
     public void addAssegnazioneLaboratorioProgetto(int indiceProgettoInCorso, String nomeLab,
                                                    String topicLab) throws RuntimeException {
@@ -1627,11 +1615,13 @@ public class Controller {
     }
 
     /**
-     * Rimuovi assegnazione.
+     * Se il progetto in corso ha almeno due laboratori assegnati, e non esistono impiegati afferenti al laboratorio
+     * da eliminare che lavorano al progetto, elimina l'assegnazione del laboratorio al progetto. Altrimenti si
+     * riscontra un'eccezione
      *
-     * @param indiceProgettoInCorso the progetto in corso
-     * @param indiceLaboratorio     the laboratorio
-     * @throws RuntimeException the runtime exception
+     * @param indiceProgettoInCorso La posizione del progetto in corso in azienda.
+     * @param indiceLaboratorio     La posizione del laboratorio nella lista di assegnazioni nel progetto.
+     * @throws RuntimeException L'eccezione avviene quando ci sono impiegati afferenti al laboratorio che lavorano al progetto, oppure quando il laboratorio che si vuole eliminare è l'unico assegnato al progetto.
      */
     public void rimuoviAssegnazione(int indiceProgettoInCorso, int indiceLaboratorio) throws RuntimeException {
         ProgettoInCorso progettoInCorso = getProgettiInCorso().get(indiceProgettoInCorso);
@@ -1669,11 +1659,12 @@ public class Controller {
     }
 
     /**
-     * Sets referente scientifico.
+     * Sostituisce il referente scientifico del progetto in corso indicato dall'indice progetto in input con
+     * l'impiegato di codice fiscale pari alla stringa al secondo input
      *
-     * @param indiceProgetto the indice progetto
-     * @param cfImpiegato    the cf impiegato
-     * @throws RuntimeException the runtime exception
+     * @param indiceProgetto indice del progetto in corso di cui vogliamo sostituire il referente scientifico.
+     * @param cfImpiegato    codice fiscale dell'impiegato che assumerà il ruolo di referente scientifico.
+     * @throws RuntimeException sollevata quando il codice fiscale non appartiene ad un impiegato senior o quando non appartiene ad alcun impiegato in azienda.
      */
     public void setReferenteScientifico(int indiceProgetto, String cfImpiegato) throws RuntimeException {
         ProgettoInCorso progettoInCorso = azienda.getProgettiInCorso().get(indiceProgetto);
@@ -1691,11 +1682,12 @@ public class Controller {
     }
 
     /**
-     * Sets responsabile.
+     * Sostituisce il responsabile del progetto in corso indicato dall'indice progetto in input con
+     * l'impiegato di codice fiscale pari alla stringa al secondo input
      *
-     * @param indiceProgetto the indice progetto
-     * @param cfImpiegato    the cf impiegato
-     * @throws RuntimeException the runtime exception
+     * @param indiceProgetto indice del progetto in corso di cui vogliamo sostituire il responsabile.
+     * @param cfImpiegato    codice fiscale dell'impiegato che assumerà il ruolo di responsabile.
+     * @throws RuntimeException sollevata quando il codice fiscale non appartiene ad un impiegato dirigente o quando non appartiene ad alcun impiegato in azienda.
      */
     public void setResponsabile(int indiceProgetto, String cfImpiegato) throws RuntimeException {
         ProgettoInCorso progettoInCorso = azienda.getProgettiInCorso().get(indiceProgetto);
@@ -1713,11 +1705,12 @@ public class Controller {
     }
 
     /**
-     * Sets responsabile scientifico.
+     * Sostituisce il responsabile scientifico del progetto in corso indicato dall'indice progetto in input con
+     * l'impiegato di codice fiscale pari alla stringa al secondo input
      *
-     * @param indiceLaboratorio the indice laboratorio
-     * @param cfImpiegato       the cf impiegato
-     * @throws RuntimeException the runtime exception
+     * @param indiceLaboratorio indice del laboratorio di cui vogliamo sostituire il responsabile scientifico.
+     * @param cfImpiegato       codice fiscale dell'impiegato che assumerà il ruolo di responsabile scientifico.
+     * @throws RuntimeException sollevata quando il codice fiscale non appartiene ad un impiegato senior o quando non appartiene ad alcun impiegato in azienda.
      */
     public void setResponsabileScientifico(int indiceLaboratorio, String cfImpiegato) throws RuntimeException {
         //in memoria
@@ -1739,13 +1732,14 @@ public class Controller {
         laboratorioDAO.setResponsabileScientifico(laboratorio.getNome(), laboratorio.getTopic(), cfImpiegato);
     }
 
+
     /**
-     * Update afferenza imp boolean.
+     * Metodo che assegna o modifica un laboratorio di un impiegato.
      *
-     * @param cf      the cf
-     * @param nomeLab the nome lab
-     * @param topic   the topic
-     * @return the boolean
+     * @param cf      stringa codice fiscale impiegato
+     * @param nomeLab stringa nome laboratorio
+     * @param topic   stringa topic laboratorio
+     * @return the boolean: true se la modifica è avvenuta con successo, false altrimenti
      */
     public boolean updateAfferenzaImp(String cf, String nomeLab, String topic) {
 
@@ -1809,12 +1803,12 @@ public class Controller {
     }
 
     /**
-     * Update ore boolean.
+     * metodo che modifica le ore di un lavoro assegnato all'impiegato passato come parametro
      *
-     * @param cf  the cf
-     * @param cup the cup
-     * @param ore the ore
-     * @return the boolean
+     * @param cf  stringa cofice fiscaale
+     * @param cup stringa cup progetto
+     * @param ore valore intero che rappresenta le nuove ore da assegnare
+     * @return the boolean: true se la modifica è avvenuta, false altrimenti
      */
     public boolean updateOre(String cf, String cup, int ore){
 
@@ -1854,10 +1848,11 @@ public class Controller {
     }
 
     /**
-     * Delete laboratorio.
+     * Purché non vi siano impiegati che vi afferiscono o progetti in corso che vi sono assegnati, elimina il laboratorio
+     * in posizione corrispondente all'indice in input. Altrimenti, propaga una eccezione.
      *
-     * @param indiceLaboratorio the indice laboratorio
-     * @throws RuntimeException the runtime exception
+     * @param indiceLaboratorio indice del laboratorio da eliminare.
+     * @throws RuntimeException sollevata nel caso in cui vi siano progetti in corso assegnati al laboratorio o impiegati che vi afferiscono.
      */
 //Cancellazioni
     public void deleteLaboratorio(int indiceLaboratorio) throws RuntimeException {
@@ -1872,11 +1867,13 @@ public class Controller {
     }
 
     /**
-     * Insert lavoro contribuito boolean.
+     * Conclude il lavoro relativo al progetto con cup uguale alla stringa passato per secondo parametro ed
+     * all'impiegato con cf uguale alla string passata come primo parametro.
+     * Verrà quindi eliminato dalla arrayList di Lavori dell'impiegato e aggiunto all'ArrayList di contributi passati.
      *
-     * @param cf  the cf
-     * @param cup the cup
-     * @return the boolean
+     * @param cf  stringa impiegato
+     * @param cup stringa cup progetto
+     * @return the boolean: true se la conclusione del progetto è avvenuto con successo, false altrimenti
      */
     public boolean insertLavoroContribuito(String cf, String cup){
 
@@ -1934,11 +1931,12 @@ public class Controller {
         return flag;
     }
 
+
     /**
-     * Delete impiegato boolean.
+     * Metodo che elimina un impiegato dal sistema, assicurandosi che non abbia vincoli nel sistema.
      *
-     * @param cf the cf
-     * @return the boolean
+     * @param cf stringa codice fiscale
+     * @return the boolean: true se l'elimianzione è avvenuto, false altrimenti.
      */
     public boolean deleteImpiegato(String cf){
 
@@ -2027,6 +2025,11 @@ public class Controller {
         return flag;
     }
 
+    /**
+     * Elimina un progetto in corso.
+     *
+     * @param indiceProgetto indice del progetto da eliminare nella lista di progetti in corso.
+     */
     public void removeProgettoInCorso(int indiceProgetto) {
 
         //in memoria
@@ -2039,6 +2042,11 @@ public class Controller {
         progettoInCorsoDAO.removeProgettoInCorso(progetto.getCup());
     }
 
+    /**
+     * Elimina un progetto concluso.
+     *
+     * @param indiceProgetto indice del progetto da eliminare nella lista di progetti conclusi.
+     */
     public void removeProgettoConcluso(int indiceProgetto) {
 
         //in memoria
@@ -2049,6 +2057,701 @@ public class Controller {
         ProgettoConclusoDAO progettoConclusoDAO = new ProgettoConclusoImplementazionePostgresDAO();
 
         progettoConclusoDAO.removeProgettoConcluso(progetto.getCup());
+    }
+
+
+    /**
+     * Calcolo cf string.
+     *
+     * @param cognome        the cognome
+     * @param nome           the nome
+     * @param dataDiNascita  the data di nascita
+     * @param sesso          the sesso
+     * @param isEstero       the is estero
+     * @param luogoDiNascita the luogo di nascita
+     * @return the string
+     */
+///////////////////METODI PER IL CALCOLO DEL CF
+
+    /**
+     * Calcola il codice fiscale a partire dai dati di input.
+     * @param cognome cognome
+     * @param nome nome
+     * @param dataDiNascita data di nascita
+     * @param sesso genere anagrafico
+     * @param isEstero true se l'impiegato è straniero, false se è italiano
+     * @param luogoDiNascita luogo di nascita.
+     * @return restituisce il codice fiscale calcolato
+     */
+    public String calcoloCF(String cognome, String nome, Date dataDiNascita, char sesso, boolean isEstero, String luogoDiNascita){
+
+        String cf = new String();
+
+        cognome = cognome.replaceAll("\\s","");
+
+        cognome = cognome.toLowerCase();
+
+        nome = nome.replaceAll("\\s","");
+
+        nome = nome.toLowerCase();
+
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
+
+        cal.setTime(dataDiNascita);
+
+        int year = cal.get(Calendar.YEAR);
+
+        int month = cal.get(Calendar.MONTH);
+
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        if(eliminaVocali(cognome).length() >= 3) {
+
+            cf = eliminaVocali(cognome).substring(0,3);
+        }
+
+        if(eliminaVocali(cognome).length() == 2) {
+
+            cf = eliminaVocali(cognome).substring(0,2);
+
+            cf = cf + eliminaConsonanti(cognome).substring(0,1);
+        }
+
+        if(eliminaVocali(cognome).length() == 1 && eliminaConsonanti(cognome).length() >= 2) {
+
+            cf = eliminaVocali(cognome);
+
+            cf = cf + eliminaConsonanti(cognome).substring(0,2);
+        }
+
+        if(eliminaVocali(cognome).length() == 1 && eliminaConsonanti(cognome).length() == 1) {
+
+            cf = eliminaVocali(cognome);
+
+            cf = cf + eliminaConsonanti(cognome);
+
+            cf = cf + "x";
+        }
+
+        if(eliminaVocali(cognome).length() == 0 && eliminaConsonanti(cognome).length() == 2) {
+
+            cf = eliminaConsonanti(cognome);
+
+            cf = cf + "x";
+        }
+
+        if(eliminaVocali(nome).length() >= 4) {
+
+            cf = cf + eliminaVocali(nome).substring(0,1);
+
+            cf = cf + eliminaVocali(nome).substring(2,4);
+        }
+
+        if(eliminaVocali(nome).length() == 3) {
+
+            cf = cf + eliminaVocali(nome).substring(0,3);
+        }
+
+        if(eliminaVocali(nome).length() == 2) {
+
+            cf = cf + eliminaVocali(nome);
+
+            cf = cf + eliminaConsonanti(nome).substring(0,1);
+        }
+
+        if(eliminaVocali(nome).length() == 1 && eliminaConsonanti(nome).length() == 2) {
+
+            cf = cf + eliminaVocali(nome);
+
+            cf = cf + eliminaConsonanti(nome);
+        }
+
+        if(eliminaVocali(nome).length() == 1 && eliminaConsonanti(nome).length() == 1) {
+
+            cf = cf + eliminaVocali(nome);
+
+            cf = cf + eliminaConsonanti(nome);
+
+            cf = cf + "x";
+        }
+
+        if(eliminaVocali(nome).length() == 0 && eliminaConsonanti(nome).length() == 2) {
+
+            cf = cf + eliminaConsonanti(nome);
+
+            cf = cf + "x";
+        }
+
+        int charAnno = year%100;
+
+        if(charAnno > 10) cf = cf + charAnno;
+
+        else if(charAnno > 0) cf = cf + "0" + charAnno;
+
+        else cf = cf + "00";
+
+        String charMese = convertiMese(month);
+
+        cf = cf + charMese;
+
+        if(sesso == 'f') day = day +40;
+
+        String dayString;
+
+        dayString = (day < 10) ? ("0" + String.valueOf(day)) : String.valueOf(day);
+
+        cf = cf + dayString;
+
+        cf = cf + calcolaCodiceCatastale(luogoDiNascita, isEstero);
+
+        cf = cf.toLowerCase();
+
+        String letterePari;
+
+        String lettereDispari;
+
+        letterePari = letterePari(cf);
+
+        lettereDispari = lettereDispari(cf);
+
+        int somma = 0;
+
+        for(int i = 0; i<letterePari.length(); i++) {
+
+            somma = somma + convertiPari(letterePari.substring(i,i+1));
+        }
+
+        for(int i = 0; i<lettereDispari.length(); i++) {
+
+            somma = somma + convertiDispari(lettereDispari.substring(i,i+1));
+        }
+
+        somma = somma%26;
+
+        cf = cf + checkDigit(somma);
+
+        cf = cf.toUpperCase();
+
+        return cf;
+    }
+
+    /**
+     * Funzione ausiliare per il calcolo del cf.
+     * @param parola parole
+     * @return
+     */
+    private String eliminaVocali(String parola) {
+
+        String decomposta;
+
+        decomposta = parola.replace("a", "");
+
+        decomposta = decomposta.replace("e", "");
+
+        decomposta = decomposta.replace("i", "");
+
+        decomposta = decomposta.replace("o", "");
+
+        decomposta = decomposta.replace("u", "");
+
+        return decomposta;
+    }
+
+    /**
+     *Funzione ausiliare per il calcolo del cf.
+     * @param parola
+     * @return
+     */
+    private String eliminaConsonanti(String parola) {
+
+        String decomposta;
+
+        decomposta = parola.replace("b", "");
+
+        decomposta = decomposta.replace("c", "");
+
+        decomposta = decomposta.replace("d", "");
+
+        decomposta = decomposta.replace("f", "");
+
+        decomposta = decomposta.replace("g", "");
+
+        decomposta = decomposta.replace("h", "");
+
+        decomposta = decomposta.replace("j", "");
+
+        decomposta = decomposta.replace("k", "");
+
+        decomposta = decomposta.replace("l", "");
+
+        decomposta = decomposta.replace("m", "");
+
+        decomposta = decomposta.replace("n", "");
+
+        decomposta = decomposta.replace("p", "");
+
+        decomposta = decomposta.replace("q", "");
+
+        decomposta = decomposta.replace("r", "");
+
+        decomposta = decomposta.replace("s", "");
+
+        decomposta = decomposta.replace("t", "");
+
+        decomposta = decomposta.replace("v", "");
+
+        decomposta = decomposta.replace("w", "");
+
+        decomposta = decomposta.replace("x", "");
+
+        decomposta = decomposta.replace("y", "");
+
+        decomposta = decomposta.replace("z", "");
+
+        return  decomposta;
+    }
+
+    /**
+     * Funzione ausiliare per il calcolo del cf.
+     * @param mese mese
+     * @return
+     */
+    private String convertiMese(int mese) {
+
+        mese = mese + 1;
+
+        switch (mese) {
+
+            case 1:
+
+                return "a";
+
+            case 2:
+
+                return "b";
+
+            case 3:
+
+                return "c";
+
+            case 4:
+
+                return "d";
+
+
+            case 5:
+
+                return "e";
+
+            case 6:
+
+                return "h";
+
+            case 7:
+
+                return "l";
+
+            case 8:
+
+                return "m";
+
+            case 9:
+
+                return "p";
+
+
+            case 10:
+
+                return "r";
+
+            case 11:
+
+                return "s";
+
+            case 12:
+
+                return "t";
+
+            default:
+
+                return "null";
+
+        }
+
+    }
+
+    /**
+     * funzione ausiliare per il calcolo del cf
+     * @param luogoDiNascita luogo di nascita
+     * @param estero true se il luogo è una nazione straniera, false se è una provincia italiana.
+     * @return
+     */
+    private String calcolaCodiceCatastale(String luogoDiNascita, boolean estero){
+
+        String[] codiciIta = new String[8000];
+        String[] codiciEsteri = new String[300];
+
+        ////////////////////CARICAMENTO CODICI CATASTALI DAI FILE////////////////////////////
+        int i = 0;
+        String line;
+        InputStream is = getClass().getResourceAsStream("/codici_ita.txt");
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        try {
+            while((line = br.readLine()) != null)  {
+                codiciIta[i++] = line;
+            }
+            br.close();
+            isr.close();
+            is.close();
+        }
+        catch(Exception e){
+
+            //
+        }
+
+        i = 0;
+        is = getClass().getResourceAsStream("/codici_esteri.txt");
+        isr = new InputStreamReader(is);
+        br = new BufferedReader(isr);
+        try {
+            while((line = br.readLine()) != null)  {
+                codiciEsteri[i++] = line;
+            }
+            br.close();
+            isr.close();
+            is.close();
+        }
+        catch(Exception e){
+
+            //
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        if(!estero){
+
+            i = 0;
+            is = getClass().getResourceAsStream("/comuniPerCodice.txt");
+            isr = new InputStreamReader(is);
+            br = new BufferedReader(isr);
+            try {
+                while((line = br.readLine()) != null)  {
+                    if (line.equals(luogoDiNascita)) break;
+                    else i++;
+                }
+                br.close();
+                isr.close();
+                is.close();
+            }
+            catch(Exception e){
+
+                //
+            }
+
+            return codiciIta[i];
+
+        } else{
+
+            i = 0;
+            is = getClass().getResourceAsStream("/esteriPerCodice.txt");
+            isr = new InputStreamReader(is);
+            br = new BufferedReader(isr);
+            try {
+                while((line = br.readLine()) != null)  {
+                    if (line.equals(luogoDiNascita)) break;
+                    else i++;
+                }
+                br.close();
+                isr.close();
+                is.close();
+            }
+            catch(Exception e){
+
+                //
+            }
+
+            return codiciEsteri[i];
+        }
+    }
+
+    /**
+     * Funzione ausiliaria per il calcolo del codice fiscale
+     * @param parola
+     * @return
+     */
+    private String letterePari(String parola) {
+
+        String pari = "";
+
+        for(int i = 1; i<=parola.length(); i++) {
+
+            if(i%2 == 0) {
+
+                pari = pari + parola.substring(i-1, i);
+
+            }
+        }
+
+        return pari;
+    }
+
+    /**
+     * funzione ausiliaria per il calcolo del codice fiscale
+     * @param parola parola
+     * @return
+     */
+    private String lettereDispari(String parola) {
+
+        String dispari = "";
+
+        for(int i = 1; i<=parola.length(); i++) {
+
+            if(i%2 != 0) {
+
+                dispari = dispari + parola.substring(i-1, i);
+            }
+        }
+
+        return dispari;
+    }
+
+    /**
+     * funzione ausiliaria per il calcolo del codice fiscale
+     * @param lettera lettera
+     * @return
+     */
+    private int convertiPari(String lettera) {
+
+        if(lettera.equals("a") || lettera.equals("0")) return 0;
+
+        else if(lettera.equals("b") || lettera.equals("1")) return 1;
+
+        else if(lettera.equals("c") || lettera.equals("2")) return 2;
+
+        else if(lettera.equals("d") || lettera.equals("3")) return 3;
+
+        else if(lettera.equals("e") || lettera.equals("4")) return 4;
+
+        else if(lettera.equals("f") || lettera.equals("5")) return 5;
+
+        else if(lettera.equals("g") || lettera.equals("6")) return 6;
+
+        else if(lettera.equals("h") || lettera.equals("7")) return 7;
+
+        else if(lettera.equals("i") || lettera.equals("8")) return 8;
+
+        else if(lettera.equals("j") || lettera.equals("9")) return 9;
+
+        else if(lettera.equals("k")) return 10;
+
+        else if(lettera.equals("l")) return 11;
+
+        else if(lettera.equals("m")) return 12;
+
+        else if(lettera.equals("n")) return 13;
+
+        else if(lettera.equals("o")) return 14;
+
+        else if(lettera.equals("p")) return 15;
+
+        else if(lettera.equals("q")) return 16;
+
+        else if(lettera.equals("r")) return 17;
+
+        else if(lettera.equals("s")) return 18;
+
+        else if(lettera.equals("t")) return 19;
+
+        else if(lettera.equals("u")) return 20;
+
+        else if(lettera.equals("v")) return 21;
+
+        else if(lettera.equals("w")) return 22;
+
+        else if(lettera.equals("x")) return 23;
+
+        else if(lettera.equals("y")) return 24;
+
+        else return 25;
+    }
+
+    /**
+     * funzione ausiliaria per il calcolo del codice fiscale
+     * @param lettera lettera
+     * @return
+     */
+    private int convertiDispari(String lettera) {
+
+        if(lettera.equals("a") || lettera.equals("0")) return 1;
+
+        else if(lettera.equals("b") || lettera.equals("1")) return 0;
+
+        else if(lettera.equals("c") || lettera.equals("2")) return 5;
+
+        else if(lettera.equals("d") || lettera.equals("3")) return 7;
+
+        else if(lettera.equals("e") || lettera.equals("4")) return 9;
+
+        else if(lettera.equals("f") || lettera.equals("5")) return 13;
+
+        else if(lettera.equals("g") || lettera.equals("6")) return 15;
+
+        else if(lettera.equals("h") || lettera.equals("7")) return 17;
+
+        else if(lettera.equals("i") || lettera.equals("8")) return 19;
+
+        else if(lettera.equals("j") || lettera.equals("9")) return 21;
+
+        else if(lettera.equals("k")) return 2;
+
+        else if(lettera.equals("l")) return 4;
+
+        else if(lettera.equals("m")) return 18;
+
+        else if(lettera.equals("n")) return 20;
+
+        else if(lettera.equals("o")) return 11;
+
+        else if(lettera.equals("p")) return 3;
+
+        else if(lettera.equals("q")) return 6;
+
+        else if(lettera.equals("r")) return 8;
+
+        else if(lettera.equals("s")) return 12;
+
+        else if(lettera.equals("t")) return 14;
+
+        else if(lettera.equals("u")) return 16;
+
+        else if(lettera.equals("v")) return 10;
+
+        else if(lettera.equals("w")) return 22;
+
+        else if(lettera.equals("x")) return 25;
+
+        else if(lettera.equals("y")) return 24;
+
+        else return 23;
+    }
+
+    /**
+     * funzione ausiliaria per il calcolo del codice fiscale
+     * @param val valore
+     * @return
+     */
+    private String checkDigit(int val) {
+
+        switch (val) {
+
+            case 0:
+
+                return "a";
+
+            case 1:
+
+                return "b";
+
+            case 2:
+
+                return "c";
+
+            case 3:
+
+                return "d";
+
+            case 4:
+
+                return "e";
+
+            case 5:
+
+                return "f";
+
+            case 6:
+
+                return "g";
+
+            case 7:
+
+                return "h";
+
+            case 8:
+
+                return "i";
+
+            case 9:
+
+                return "j";
+
+            case 10:
+
+                return "k";
+
+            case 11:
+
+                return "l";
+
+            case 12:
+
+                return "m";
+
+            case 13:
+
+                return "n";
+
+            case 14:
+
+                return "o";
+
+            case 15:
+
+                return "p";
+
+            case 16:
+
+                return "q";
+
+            case 17:
+
+                return "r";
+
+            case 18:
+
+                return "s";
+
+            case 19:
+
+                return "t";
+
+            case 20:
+
+                return "u";
+
+            case 21:
+
+                return "v";
+
+            case 22:
+
+                return "w";
+
+            case 23:
+
+                return "x";
+
+            case 24:
+
+                return "y";
+
+            case 25:
+
+                return "z";
+
+            default:
+
+                return "0";
+        }
     }
 
 

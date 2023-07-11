@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Junior.
+ * Rappresenta gli impiegati appartenenti alla categoria junior.
  */
 public class Junior extends Impiegato{
 
 
     /**
-     * Instantiates a new Junior.
+     * Costruttore per impiegato junior non dirigente.
      *
      * @param nome             the nome
      * @param cognome          the cognome
@@ -31,7 +31,7 @@ public class Junior extends Impiegato{
     }
 
     /**
-     * Instantiates a new Junior.
+     * Costruttore per impiegato junior dirigente
      *
      * @param nome               the nome
      * @param cognome            the cognome

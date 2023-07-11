@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
- * The type Area impiegato.
+ * Interfaccia grafica per visualizzare i dati degli impiegati
  */
 public class AreaImpiegato extends JFrame {
 

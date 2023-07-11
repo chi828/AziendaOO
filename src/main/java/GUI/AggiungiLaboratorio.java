@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The type Aggiungi laboratorio.
+ * Interfaccia grafica per aggiungere un laboratorio.
  */
 public class AggiungiLaboratorio {
     private JTextField nomeTextField;

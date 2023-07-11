@@ -6,7 +6,7 @@ package DAO;
 public interface LavorareDAO {
 
     /**
-     * Update ore boolean.
+     * Modifica in database le ore di lavoro su un progetto assegnate ad un impiegato.
      *
      * @param cf  the cf
      * @param cup the cup

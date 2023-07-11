@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Impiegato.
+ * Classe per rappresentare gli impiegati.
  */
 public class Impiegato {
 

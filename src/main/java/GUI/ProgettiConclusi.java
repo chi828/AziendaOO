@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Progetti conclusi.
+ * Interfaccia grafica per la visualizzazione e l'eliminazione dei progetti conclusi.
  */
 public class ProgettiConclusi {
     private JTable progettiTable;

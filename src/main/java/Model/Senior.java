@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Senior.
+ * Rappresenta gli impiegati appartenenti alla categoria senior.
  */
 public class Senior extends Impiegato{
 
@@ -12,7 +12,7 @@ public class Senior extends Impiegato{
     private Date passaggioSenior;
 
     /**
-     * Instantiates a new Senior.
+     * Costruttore per impiegato senior non dirigente.
      *
      * @param nome             the nome
      * @param cognome          the cognome
@@ -35,7 +35,7 @@ public class Senior extends Impiegato{
     }
 
     /**
-     * Instantiates a new Senior.
+     * Costruttore per impiegato senior dirigente.
      *
      * @param nome               the nome
      * @param cognome            the cognome

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Area laboratorio.
+ * Interfaccia grafica per la visualizzazione e la modifica dei laboratorio
  */
 public class AreaLaboratorio {
 

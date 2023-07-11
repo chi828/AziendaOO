@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Interfaccia utente per l'apertura di nuovi progetti.
+ * Interfaccia grafica per l'apertura di nuovi progetti.
  */
 public class AggiungiProgetto {
     private JTextField nomeText;

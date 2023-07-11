@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * The type Lavorare. Associazione fra Impiegato e Progetto. Rappresenta il lavoro che è assegnato ad un
+ * Associazione fra Impiegato e Progetto. Rappresenta il lavoro che è assegnato ad un
  * impiegato su uno specifico progetto.
  */
 public class Lavorare {

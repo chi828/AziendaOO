@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Dirigente.
+ * Classe che rappresente il ruolo di dirigente assegnato ad un impiegato.
  */
 public class Dirigente {
     private Date passaggioDirigente;

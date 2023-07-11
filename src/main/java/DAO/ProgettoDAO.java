@@ -1,17 +1,16 @@
 package DAO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * The interface Progetto dao.
  */
 public interface ProgettoDAO {
     /**
-     * Read assegnazioni.
+     * Recupera dal database i laboratori assegnati ad un progetto
      *
-     * @param cup        the cup
-     * @param laboratori the laboratori
+     * @param cup        cup del progetto
+     * @param laboratori laboratori assegnati [nome, topic]
      */
     public void readAssegnazioni(String cup, ArrayList<String[]> laboratori);
 }
