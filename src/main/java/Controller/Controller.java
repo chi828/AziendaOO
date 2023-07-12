@@ -104,7 +104,6 @@ public class Controller {
 
         aziendaDB.readAllJuniorDirigenti(juniorDirigentiString, juniorDirigentiDate, afferenze, juniorDStipendi);
 
-        impiegatoD = new Date[3];
         for (int i=0; i < juniorDirigentiString.size(); i++) {
             impiegatoD = juniorDirigentiDate.get(i);
             impiegatoS = juniorDirigentiString.get(i);
@@ -141,7 +140,6 @@ public class Controller {
 
         aziendaDB.readAllMiddleDirigenti(middleDirigentiString, middleDirigentiDate, afferenze, middleDStipendi);
 
-        impiegatoD = new Date[4];
         for (int i=0; i < middleDirigentiString.size(); i++) {
             impiegatoD = middleDirigentiDate.get(i);
             impiegatoS = middleDirigentiString.get(i);
@@ -178,7 +176,6 @@ public class Controller {
 
         aziendaDB.readAllSeniorDirigenti(seniorDirigentiString, seniorDirigentiDate, afferenze, seniorDStipendi);
 
-        impiegatoD = new Date[4];
         for (int i=0; i < seniorDirigentiString.size(); i++) {
             impiegatoD = seniorDirigentiDate.get(i);
             impiegatoS = seniorDirigentiString.get(i);
