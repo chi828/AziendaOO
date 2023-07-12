@@ -184,8 +184,16 @@ public class Azienda {
 
         ArrayList<ProgettoConcluso> assegnazioniDaEliminare = new ArrayList<>();
 
+        for (Impiegato impiegato: impiegati) {
+            if(impiegato.getAfferenza() != null){
+                if (impiegato.getAfferenza().equals(laboratorio)) {
+                    throw new RuntimeException("Eliminazione annullata. Ci sono impiegati che afferiscono al laboratorio");
+                }
+            }
+        }
+
         for (Progetto progetto: progetti
-             ) {
+        ) {
 
             if(progetto.getLaboratoriAssegnati().contains(laboratorio)) {
                 if(progetto.isConcluso()){
@@ -198,16 +206,8 @@ public class Azienda {
         }
 
         for (ProgettoConcluso progetto: assegnazioniDaEliminare
-             ) {
-            progetto.getLaboratoriAssegnati().remove(laboratorio);
-        }
-
-        for (Impiegato impiegato: impiegati) {
-            if(impiegato.getAfferenza() != null){
-                if (impiegato.getAfferenza().equals(laboratorio)) {
-                    throw new RuntimeException("Eliminazione annullata. Ci sono impiegati che afferiscono al laboratorio");
-                }
-            }
+        ) {
+            progetto.removeAssegnazione(laboratorio);
         }
 
         laboratori.remove(laboratorio);

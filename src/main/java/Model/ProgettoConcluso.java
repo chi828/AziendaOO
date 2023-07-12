@@ -50,4 +50,8 @@ public class ProgettoConcluso extends Progetto{
     public Boolean isConcluso() {
         return true;
     }
+
+    public void removeAssegnazione(Laboratorio laboratorio) {
+        laboratoriAssegnati.remove(laboratorio);
+    }
 }
