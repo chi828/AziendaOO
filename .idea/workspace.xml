@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9e34cf23-5fe9-42f5-b2a4-f9a047acc82c" name="Changes" comment="Corretta eliminazione di un laboratorio">
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/AreaImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/AreaImpiegato.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5502c805-4cc9-41ca-8a05-dbf244b3984d" />
+        <option name="url" value="https://github.com/chi828/AziendaOO.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Rq91lUBJNGyHEUmVyOSuYWmu48" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;93&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;256&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chiar/OneDrive/Desktop/AziendaOO&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chiar\OneDrive\Desktop\AziendaV3\AziendaV3\src\main\java\GUI" />
+      <recent name="C:\Users\chiar\OneDrive\Desktop\Azienda-Versione-2-main\AziendaV2\src\main\java\Connessione" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Database" />
+      <recent name="GUI" />
+      <recent name="Model" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="?" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Home" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.Home" />
+      <module name="AziendaV2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="AziendaV3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="AziendaV3" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Home" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9e34cf23-5fe9-42f5-b2a4-f9a047acc82c" name="Changes" comment="" />
+      <created>1687966534892</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687966534892</updated>
+      <workItem from="1687966535972" duration="4249000" />
+      <workItem from="1688210830569" duration="8223000" />
+      <workItem from="1688285986377" duration="28087000" />
+      <workItem from="1688371855900" duration="13348000" />
+      <workItem from="1688465773984" duration="818000" />
+      <workItem from="1688466602651" duration="10066000" />
+      <workItem from="1688549855936" duration="16987000" />
+      <workItem from="1688573688085" duration="2646000" />
+      <workItem from="1688646042955" duration="13464000" />
+      <workItem from="1688670394930" duration="2280000" />
+      <workItem from="1688712657776" duration="37049000" />
+      <workItem from="1688804672522" duration="9377000" />
+      <workItem from="1688825447975" duration="11923000" />
+      <workItem from="1688838218819" duration="43119000" />
+      <workItem from="1689066478061" duration="1496000" />
+      <workItem from="1689068036823" duration="196000" />
+      <workItem from="1689068245920" duration="2250000" />
+      <workItem from="1689082101070" duration="21685000" />
+      <workItem from="1689146391134" duration="5242000" />
+      <workItem from="1689153815935" duration="5540000" />
+      <workItem from="1689169255880" duration="840000" />
+      <workItem from="1689233619479" duration="4694000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1688920952019</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688920952019</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Correzioni minori">
+      <option name="closed" value="true" />
+      <created>1688973026087</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688973026087</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Correzioni minori">
+      <option name="closed" value="true" />
+      <created>1688975793704</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688975793704</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Aggiunta eliminazione progetti, migliorata eliminazione laboratori">
+      <option name="closed" value="true" />
+      <created>1689089191863</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1689089191863</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Corretta la funzione addImpiegato, aggiunti commenti per javaDoc">
+      <option name="closed" value="true" />
+      <created>1689111869703</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689111869703</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Corretta eliminazione di un laboratorio">
+      <option name="closed" value="true" />
+      <created>1689155003352</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1689155003352</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Corretta eliminazione di un laboratorio">
+      <option name="closed" value="true" />
+      <created>1689155819710</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689155819710</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Correzioni minori" />
+    <MESSAGE value="Aggiunta eliminazione progetti, migliorata eliminazione laboratori" />
+    <MESSAGE value="Corretta la funzione addImpiegato, aggiunti commenti per javaDoc" />
+    <MESSAGE value="Corretta eliminazione di un laboratorio" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corretta eliminazione di un laboratorio" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
