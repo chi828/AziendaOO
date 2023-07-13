@@ -333,7 +333,7 @@ public class Controller {
         Impiegato result = null;
         for (Impiegato impiegato : azienda.getImpiegati()
         ) {
-            if (impiegato.getCf().equals(cf)) {
+            if (impiegato.getCf().equalsIgnoreCase(cf)) {
                  result = impiegato;
                 break;
             }
@@ -1408,16 +1408,22 @@ public class Controller {
             return false;
         }
 
+        if(findProgetto(cup).isConcluso()) {
+            JOptionPane.showMessageDialog(null,"Il progetto inserito si è già concluso.", "Errore", JOptionPane.ERROR_MESSAGE);
+
+            return false;
+        }
+
         //Controllo che il progetto da assegnare sia assegnato allo stesso laboratorio per cui lavora l'impiegato
         for(Impiegato imp : getImpiegati()){
 
-            if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+            if(imp.getCf().equalsIgnoreCase(cf)){
 
                 if(imp.getAfferenza() != null){
 
                     for(Progetto prog : getProgetti()){
 
-                        if(prog.getCup().toLowerCase().equals(cup.toLowerCase())){
+                        if(prog.getCup().equalsIgnoreCase(cup)){
 
                             if(!prog.getLaboratoriAssegnati().contains(imp.getAfferenza())){
 
@@ -1442,6 +1448,11 @@ public class Controller {
 
         boolean flag = false;
 
+        Impiegato impiegato = findImpiegato(cf);
+        if(impiegato.getOreLavoro() + ore > 48) {
+            throw new RuntimeException("Inserimento annullato. Numero di ore lavorative settimanali supera il massimo.");
+        }
+
         //Inserimento lavorare in DB
         ImpiegatoDAO insertLavorare = new ImpiegatoImplementazionePostgresDAO();
         flag = insertLavorare.insertLavorare(cf,cup,ore);
@@ -1451,15 +1462,15 @@ public class Controller {
 
             for(Impiegato imp : getImpiegati()){
 
-                if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+                if(imp.getCf().equalsIgnoreCase(cf)){
 
                     for(Progetto prog : getProgetti()){
 
-                        if(prog.getCup().toLowerCase().equals(cup.toLowerCase()) && prog instanceof ProgettoInCorso){
+                        if(prog.getCup().equalsIgnoreCase(cup) && prog instanceof ProgettoInCorso){
 
                             if(imp.getLavoriProgettiAssegnati() != null){
 
-                                imp.getLavoriProgettiAssegnati().add(new Lavorare(imp,(ProgettoInCorso) prog,ore));
+                                imp.addLavoro(new Lavorare(imp,(ProgettoInCorso) prog,ore));
 
                                 flag = true;
 
@@ -1811,34 +1822,36 @@ public class Controller {
 
         boolean flag = false;
 
+        Impiegato impiegato = findImpiegato(cf);
+        Lavorare lavorare = null;
+
+        //cerchiamo l'impiegato ed il lavoro da modificare
+
+
+        for(Lavorare lav: impiegato.getLavoriProgettiAssegnati()) {
+            if(lav.getProgettoinCorso().getCup().equalsIgnoreCase(cup)) {
+                lavorare = lav;
+            }
+        }
+
+        if (lavorare == null) {
+            return false;
+        }
+        //verifichiamo che la modifica sia lecita
+
+        if(impiegato.getOreLavoro() - lavorare.getOre() + ore > 48){
+            JOptionPane.showMessageDialog(null, "Aggiornamento annullato: " +
+                    "ore di lavoro settimanali massime superate.");
+            return false;
+        }
+
         //Modifica ore in DB
         LavorareDAO updateOre = new LavorareImplementazionePostgresDAO();
-        flag = updateOre.updateOre(cf,cup,ore);
+        flag = updateOre.updateOre(impiegato.getCf(), lavorare.getProgettoinCorso().getCup(),ore);
 
         //Modifica in memoria
         if(flag){
-
-            for(Impiegato imp : getImpiegati()){
-
-                if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
-
-                    for(Lavorare lav : imp.getLavoriProgettiAssegnati()){
-
-                        if(lav.getProgettoinCorso().getCup().toLowerCase().equals(cup.toLowerCase())){
-
-                            lav.setOre(ore);
-
-                            flag = true;
-
-                            JOptionPane.showMessageDialog(null,"Ore modificate");
-
-                            break;
-                        }
-                    }
-
-                    break;
-                }
-            }
+            lavorare.setOre(ore);
         }
 
         return flag;

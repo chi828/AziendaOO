@@ -1070,7 +1070,14 @@ public class AreaImpiegato extends JFrame {
 
                         String cf = (String) modelTable.getValueAt(rigaSelezionata,4);
 
-                       if (controller.insertLavorare(cf,setCupField.getText(),Integer.parseInt(setOreField.getText()))){
+                        boolean controllo = false;
+                        try {
+                            controllo = controller.insertLavorare(cf, setCupField.getText(), Integer.parseInt(setOreField.getText()));
+                        } catch (RuntimeException er) {
+                            JOptionPane.showMessageDialog(null, er.getMessage());
+                        }
+
+                       if (controllo){
 
                            //Aggiornamento tabelle
                            svuotaModelTable(modelTableCarriera);
