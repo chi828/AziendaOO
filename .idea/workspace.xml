@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e34cf23-5fe9-42f5-b2a4-f9a047acc82c" name="Changes" comment="Corretta eliminazione di un laboratorio">
+    <list default="true" id="9e34cf23-5fe9-42f5-b2a4-f9a047acc82c" name="Changes" comment="Aggiunto promozione impiegati in area impiegato">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/AziendaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/AziendaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ImpiegatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ImpiegatoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/ConnessioneDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/ConnessioneDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/AreaImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/AreaImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ImplementazioniPostgresDAO/AziendaImplementazionePostgresDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ImplementazioniPostgresDAO/AziendaImplementazionePostgresDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Impiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Impiegato.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689155819710</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Aggiunto promozione impiegati in area impiegato">
+      <created>1689432482786</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689432482786</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

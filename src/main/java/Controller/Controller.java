@@ -1761,22 +1761,39 @@ public class Controller {
            return false;
        }
 
-        //Verifica che non lavoro per qualche progetto
+       //Verifica che il nuovo laboratorio afferito siano stati assegnati i progetti per cui lavora l'impiegato
+        Impiegato impiegato = null;
+        Laboratorio laboratorio = null;
         for(Impiegato imp : getImpiegati()){
 
-            if(imp.getCf().toUpperCase().equals(cf.toUpperCase())){
+            if(imp.getCf().equalsIgnoreCase(cf)){
 
-                if(imp.getLavoriProgettiAssegnati() != null && imp.getLavoriProgettiAssegnati().size() > 0){
-
-                    JOptionPane.showMessageDialog(null,"Prima di assegnare un nuovo laboratorio, concludere tutti i lavori", "Errore", JOptionPane.ERROR_MESSAGE);
-
-                    return false;
-
-                }
-
+                impiegato = imp;
                 break;
             }
         }
+
+        for(Laboratorio lab : getLaboratori()){
+
+            if(lab.getNome().equalsIgnoreCase(nomeLab) && lab.getTopic().equalsIgnoreCase(topic)){
+
+                laboratorio = lab;
+                break;
+            }
+        }
+
+        for(Lavorare lavAssegnato : impiegato.getLavoriProgettiAssegnati()){
+
+           if (!lavAssegnato.getProgettoinCorso().getLaboratoriAssegnati().contains(laboratorio)){
+
+               JOptionPane.showMessageDialog(null,"Al laboratorio non sono stati assegnati i progetti per cui lavora l'impiegato", "Errore", JOptionPane.ERROR_MESSAGE);
+
+               return false;
+           }
+
+        }
+        //////Fine verifica
+
 
         //Update in DB
         ImpiegatoDAO updateLab = new ImpiegatoImplementazionePostgresDAO();
