@@ -316,6 +316,7 @@ public class AreaImpiegato extends JFrame {
         //Dichiarazione dei bottoni di opzioni
         JButton setLabButton = new JButton("Assegna/Cambia laboratorio");
         JButton gestioneLavoriButton = new JButton("Gestione lavori");
+        JButton promuoviButton = new JButton("Promuovi a dirigente");
         JButton eliminaImpiegatoButton = new JButton("Elimina impiegato");
         JButton inserisciImpiegatoButton = new JButton("Inserisci impiegato");
         JButton homeButton = new JButton("Torna alla home");
@@ -325,6 +326,7 @@ public class AreaImpiegato extends JFrame {
 
         rigaOpzioniUnoBottoni.add(setLabButton);
         rigaOpzioniUnoBottoni.add(gestioneLavoriButton);
+        rigaOpzioniUnoBottoni.add(promuoviButton);
         rigaOpzioniUnoBottoni.add(eliminaImpiegatoButton);
         rigaOpzioniUnoBottoni.add(inserisciImpiegatoButton);
         rigaOpzioniUnoBottoni.add(homeButton);
@@ -414,6 +416,7 @@ public class AreaImpiegato extends JFrame {
         eliminaImpiegatoButton.setPreferredSize(new Dimension(200,50));
         inserisciImpiegatoButton.setPreferredSize(new Dimension(200,50));
         homeButton.setPreferredSize(new Dimension(200,50));
+        promuoviButton.setPreferredSize(new Dimension(200,50));
 
         panelSud.add(rigaOpzioniUnoBottoni);
         panelSud.add(moduloSetLab);
@@ -994,6 +997,38 @@ public class AreaImpiegato extends JFrame {
                 moduloSetLab.setVisible(false);
                 rigaOpzioniUnoBottoni.setVisible(true);
                 panelSud.setBorder(bordoFinaleSud);
+            }
+        });
+
+        //Gestione bottone "promuovi a dirigente
+        promuoviButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int impSelezionato = table.getSelectedRow();
+
+                if(impSelezionato >= 0){
+
+                    String cf = (String) modelTable.getValueAt(impSelezionato,4);
+
+                    if( controller.updateDirigenza(cf,new Date()) ){
+
+                        JOptionPane.showMessageDialog(null,"Impiegato promosso");
+
+                        //Aggiornamento tabelle
+                        svuotaModelTable(modelTableCarriera);
+                        svuotaModelTable(modelTableLabResponsabile);
+                        svuotaModelTable(modelTableProgReferente);
+                        svuotaModelTable(modelTableProgResponsabile);
+                        svuotaModelTable(modelloProgettiInCorso);
+                        svuotaModelTable(modelloProgettiInCorsoContribuito);
+                        svuotaModelTable(modelloProgConclusiContr);
+
+                        controller.setModelliInfoImpiegato(modelTableCarriera, modelTableLabResponsabile, modelTableProgReferente,
+                                modelTableProgResponsabile, modelloProgettiInCorso, modelloProgettiInCorsoContribuito,
+                                modelloProgConclusiContr, cf);
+                    }
+                }else JOptionPane.showMessageDialog(null,"Selezionare l'impiegato", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         });
 

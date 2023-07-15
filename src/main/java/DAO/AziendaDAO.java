@@ -168,4 +168,13 @@ public interface AziendaDAO {
      */
     public boolean inserisciImpiegato(String nome, String cognome, char sesso, Date dataDiNascita, String luogoDiNascita,
                                       String cf, Date dataDiAssunzione, String stipendio, boolean dirigente);
+
+    /**
+     * Inserisce un dirigente relativo all'impiegato passato come parametro.
+     *
+     * @param cf
+     * @param dataPromo
+     * @return
+     */
+    public boolean inserisciDirigente(String cf, Date dataPromo);
 }

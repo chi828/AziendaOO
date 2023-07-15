@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e34cf23-5fe9-42f5-b2a4-f9a047acc82c" name="Changes" comment="Corretta eliminazione di un laboratorio">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/AziendaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/AziendaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ImpiegatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ImpiegatoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/ConnessioneDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/ConnessioneDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GUI/AreaImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/AreaImpiegato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ImplementazioniPostgresDAO/AziendaImplementazionePostgresDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ImplementazioniPostgresDAO/AziendaImplementazionePostgresDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Impiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Impiegato.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -230,7 +241,8 @@
     <MESSAGE value="Aggiunta eliminazione progetti, migliorata eliminazione laboratori" />
     <MESSAGE value="Corretta la funzione addImpiegato, aggiunti commenti per javaDoc" />
     <MESSAGE value="Corretta eliminazione di un laboratorio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corretta eliminazione di un laboratorio" />
+    <MESSAGE value="Aggiunto promozione impiegati in area impiegato" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto promozione impiegati in area impiegato" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

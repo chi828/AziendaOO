@@ -1858,13 +1858,63 @@ public class Controller {
     }
 
     /**
+     * metodo che promuove dirigente l'impiegato relativo al codice fiscale passato come parametro.
+     *
+     * @param cf
+     * @param dataPromo
+     * @return
+     */
+
+    public boolean updateDirigenza(String cf, Date dataPromo){
+
+        Impiegato impiegato = null;
+
+        for(Impiegato imp : getImpiegati()){
+
+            if(imp.getCf().equalsIgnoreCase(cf)){
+
+                impiegato = imp;
+
+                if(imp.getDirigente() != null){
+
+                    JOptionPane.showMessageDialog(null,"L'impiegato è già dirigente");
+
+                    return false;
+                }
+
+                break;
+            }
+        }
+
+        boolean flag = false;
+        //Inseirmento dirigente in DB
+        AziendaDAO inserisciDirigente = new AziendaImplementazionePostgresDAO();
+        flag = inserisciDirigente.inserisciDirigente(cf, dataPromo);
+
+        //Modifica in memoria
+        if(flag){
+
+            Dirigente dirigente = new Dirigente(dataPromo,impiegato);
+
+            impiegato.setDirigente(dirigente);
+
+            flag = true;
+        }
+
+        return flag;
+
+    }
+
+    /**
      * Purché non vi siano impiegati che vi afferiscono o progetti in corso che vi sono assegnati, elimina il laboratorio
      * in posizione corrispondente all'indice in input. Altrimenti, propaga una eccezione.
      *
      * @param indiceLaboratorio indice del laboratorio da eliminare.
      * @throws RuntimeException sollevata nel caso in cui vi siano progetti in corso assegnati al laboratorio o impiegati che vi afferiscono.
      */
-//Cancellazioni
+
+
+//////////////Cancellazioni
     public void deleteLaboratorio(int indiceLaboratorio) throws RuntimeException {
         Laboratorio laboratorio = azienda.getLaboratori().get(indiceLaboratorio);
 
@@ -2081,7 +2131,7 @@ public class Controller {
      * @param luogoDiNascita the luogo di nascita
      * @return the string
      */
-///////////////////METODI PER IL CALCOLO DEL CF
+///////////////////METODI PER IL CALCOLO DEL CF//////////////////////////////////////////////////////////////////////////////
 
     /**
      * Calcola il codice fiscale a partire dai dati di input.

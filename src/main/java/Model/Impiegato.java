@@ -282,6 +282,13 @@ public class Impiegato {
     public void setContributiPassati(ArrayList<Progetto> progettiContribuito){this.contributiPassati = progettiContribuito;}
 
     /**
+     * Set dirigente
+     *
+     * @param dirigente
+     */
+    public void setDirigente(Dirigente dirigente){this.dirigente = dirigente;}
+
+    /**
      * Gets dirigente.
      *
      * @return the dirigente
