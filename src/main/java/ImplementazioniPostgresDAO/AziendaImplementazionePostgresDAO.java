@@ -476,6 +476,14 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Inserimento laboratorio nel database
+     *
+     * @param nome                    the nome
+     * @param topic                   the topic
+     * @param responsabileScientifico the responsabile scientifico
+     */
+
 
     public void addLaboratorio(String nome, String topic, String responsabileScientifico) {
         PreparedStatement inserisciLaboratorio;
@@ -491,6 +499,13 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
         }
     }
 
+    /**
+     * Cancellazione laboratorio dal database
+     *
+     * @param topic the topic
+     * @param nome  the nome
+     */
+
     @Override
     public void deleteLaboratorio(String topic, String nome) {
         PreparedStatement deleteLaboratorio;
@@ -503,6 +518,13 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Cancellazione di impiegato dal database
+     *
+     * @param cf the cf
+     * @return
+     */
 
     public boolean deleteImpiegato(String cf){
 
@@ -525,6 +547,21 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
 
         return flag;
     }
+
+    /**
+     * Inserimento impiegato nel database
+     *
+     * @param nome             the nome
+     * @param cognome          the cognome
+     * @param sesso            the sesso
+     * @param dataDiNascita    the data di nascita
+     * @param luogoDiNascita   the luogo di nascita
+     * @param cf               the cf
+     * @param dataDiAssunzione the data di assunzione
+     * @param stipendio        the stipendio
+     * @param dirigente        the dirigente
+     * @return
+     */
 
     public boolean inserisciImpiegato(String nome, String cognome, char sesso, Date dataDiNascita, String luogoDiNascita,
                                       String cf, Date dataDiAssunzione, String stipendio, boolean dirigente){
@@ -557,6 +594,35 @@ public class AziendaImplementazionePostgresDAO implements AziendaDAO {
             flag = false;
 
             JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+
+        return flag;
+    }
+
+    /**
+     * Inserimento dirigente nel database
+     *
+     * @param cf
+     * @param dataPromo
+     * @return
+     */
+
+    public boolean inserisciDirigente(String cf, Date dataPromo){
+
+        boolean flag = false;
+
+        PreparedStatement inserisciDirigentePS;
+        try {
+            inserisciDirigentePS = connection.prepareStatement("INSERT INTO dirigente VALUES('" + cf + "','" +
+                    dataPromo + "')");
+            inserisciDirigentePS.executeUpdate();
+            flag = true;
+            connection.close();
+
+        }catch (SQLException e){
+
+            flag = false;
+            e.printStackTrace();
         }
 
         return flag;

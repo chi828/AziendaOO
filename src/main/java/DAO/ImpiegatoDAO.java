@@ -57,5 +57,13 @@ public interface ImpiegatoDAO {
      * @param cup cup del progetto a cui ha lavorato l'impiegato.
      * @return the boolean
      */
+
+    /**
+     * Attraverso i parametri che rappresentano il codice fiscale dell'impiegato che si promuove a dirigente
+     *
+     * @param cf
+     * @param cup
+     * @return
+     */
     public boolean insertContributoPassato(String cf, String cup);
 }
