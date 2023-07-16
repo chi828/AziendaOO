@@ -1400,6 +1400,27 @@ public class Controller {
      */
     public boolean insertLavorare(String cf, String cup, int ore){
 
+        //Controllo che non lavori già per il progetto
+        ArrayList<Lavorare> lavoriAssegnati = null;
+        for(Impiegato imp : getImpiegati()){
+
+            if(imp.getCf().equalsIgnoreCase(cf)){
+
+                lavoriAssegnati = imp.getLavoriProgettiAssegnati();
+                break;
+            }
+        }
+        if(lavoriAssegnati != null){
+            for(Lavorare lav : lavoriAssegnati){
+
+                if(lav.getProgettoinCorso().getCup().equalsIgnoreCase(cup)){
+
+                    JOptionPane.showMessageDialog(null,"L'impiegato lavora già per questo progetto");
+                    return false;
+                }
+            }
+        }
+
         //Controllo esistenza progetto
         if(findProgetto(cup) == null){
 
@@ -1769,6 +1790,10 @@ public class Controller {
             if(imp.getCf().equalsIgnoreCase(cf)){
 
                 impiegato = imp;
+                if(imp.getAfferenza() != null && imp.getAfferenza().getNome().equalsIgnoreCase(nomeLab) && imp.getAfferenza().getTopic().equalsIgnoreCase(topic)){
+                    JOptionPane.showMessageDialog(null,"L'impiegato già afferisce a questo laboratorio");
+                    return true;
+                }
                 break;
             }
         }
